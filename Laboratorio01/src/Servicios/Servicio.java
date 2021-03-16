@@ -18,13 +18,13 @@ public class Servicio {
     
     public Servicio(){}
     
-    public void Conectar() throws ClassNotFoundException, SQLException{
+    protected void Conectar() throws ClassNotFoundException, SQLException{
         Class.forName("oracle.jdbc.driver.OracleDriver");
         conexion = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "system","system");   
         System.out.println("Conexión exitosa!");
     }
     
-    public void Desconectar() throws SQLException{
+    protected void Desconectar() throws SQLException{
         if(!conexion.isClosed()){
             conexion.close();
         }

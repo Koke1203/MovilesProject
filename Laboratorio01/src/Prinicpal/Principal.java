@@ -5,6 +5,7 @@
  */
 package Prinicpal;
 
+import Modelo.Ruta;
 import Servicios.Servicio;
 import java.sql.SQLException;
 
@@ -18,14 +19,18 @@ public class Principal {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Servicio servicioBD = new Servicio();
+        Ruta ruta = new Ruta("","","",13,1,"Lunes",2,1,"");
+        System.out.print(ruta.getHoraLlegada());
+        
+        //Cambiar a public la clase Servici.java
+        /*Servicio servicioBD = new Servicio();
         try {
             servicioBD.Conectar();
         } catch (ClassNotFoundException ex) {
             System.out.println("Class not found exception!");
         } catch (SQLException ex) {
             System.out.println("SQL Exception!");
-        }
+        }*/
     }
     
 }
