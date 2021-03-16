@@ -5,6 +5,9 @@
  */
 package Prinicpal;
 
+import Servicios.Servicio;
+import java.sql.SQLException;
+
 /**
  *
  * @author groya
@@ -15,7 +18,14 @@ public class Principal {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        Servicio servicioBD = new Servicio();
+        try {
+            servicioBD.Conectar();
+        } catch (ClassNotFoundException ex) {
+            System.out.println("Class not found exception!");
+        } catch (SQLException ex) {
+            System.out.println("SQL Exception!");
+        }
     }
     
 }
