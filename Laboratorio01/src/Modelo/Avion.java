@@ -10,6 +10,7 @@ package Modelo;
  * @author groya
  */
 public class Avion {
+
     
     private String identificador;
     private int anio;
@@ -87,4 +88,10 @@ public class Avion {
     public void setCantAsientos(int cantAsientos) {
         this.cantAsientos = cantAsientos;
     } 
+    
+    
+    @Override
+    public String toString() {
+        return "Avion{" + "identificador=" + identificador + ", anio=" + anio + ", marca=" + marca + ", modelo=" + modelo + ", cantPasajeros=" + cantPasajeros + ", cantFilas=" + cantFilas + ", cantAsientos=" + cantAsientos + '}';
+    }
 }

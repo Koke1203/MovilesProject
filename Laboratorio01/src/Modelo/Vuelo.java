@@ -16,10 +16,10 @@ public class Vuelo {
     private String fechaRegreso;
     private int cantidadPasajeros;
     private double precio;
-    private Avion avion;
-    private Ruta ruta;
+    private String avion;
+    private String ruta;
     
-    public Vuelo(String idVuelo, String fechaIda, String fechaRegreso, int cantidadPasajeros, double precio, Avion avion, Ruta ruta) {
+    public Vuelo(String idVuelo, String fechaIda, String fechaRegreso, int cantidadPasajeros, double precio, String avion, String ruta) {
         this.idVuelo = idVuelo;
         this.fechaIda = fechaIda;
         this.fechaRegreso = fechaRegreso;
@@ -69,19 +69,19 @@ public class Vuelo {
         this.precio = precio;
     }
 
-    public Avion getAvion() {
+    public String getAvion() {
         return avion;
     }
 
-    public void setAvion(Avion avion) {
+    public void setAvion(String avion) {
         this.avion = avion;
     }
 
-    public Ruta getRuta() {
+    public String getRuta() {
         return ruta;
     }
 
-    public void setRuta(Ruta ruta) {
+    public void setRuta(String ruta) {
         this.ruta = ruta;
     }
     

@@ -7,68 +7,64 @@ package Servicios;
 
 import Excepciones.GlobalException;
 import Excepciones.NoDataException;
-import Modelo.Avion;
+import Modelo.Usuario;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import oracle.jdbc.internal.OracleTypes;
+import oracle.jdbc.OracleTypes;
 
 /**
  *
  * @author groya
  */
-public class ServicioAvion extends Servicio{
-    
+public class ServicioUsuario extends Servicio{
     //Llamadas a los procedimientos almacenados
-    private static final String INSERTAR_AVION = "{call INSERTARAVION(?,?,?,?,?,?,?)}";
-    private static final String ELIMINAR_AVION = "{call ELIMINARAVION(?)}";
-    private static final String MODIFICAR_AVION = "{call MODIFICARAVION(?,?,?,?,?,?,?)}";
-    private static final String CONSULTAR_AVION = "{?=call CONSULTARAVION(?)}";
-    private static final String LISTAR_AVIONES = "{?=call LISTARAVIONES()}";
+    private static final String INSERTAR_USUARIO = "{call INSERTARUSUARIO(?,?,?,?)}";
+    private static final String ELIMINAR_USUARIO = "{call ELIMINARUSUARIO(?)}";
+    private static final String MODIFICAR_USUARIO = "{call MODIFICARUSUARIO(?,?,?,?)}";
+    private static final String CONSULTAR_USUARIO = "{?=call CONSULTARUSUARIO(?)}";
+    private static final String LISTAR_USUARIOS = "{?=call LISTARUSUARIOS()}";
     
-    public void insertarAvion(Avion avion) throws Exception{
+    public void insertarUsuario(Usuario usuario) throws Exception{
         try{
             Conectar();
         }catch(ClassNotFoundException e){
             try{
                 throw new GlobalException("Error: Driver para establecer conexión, no se ha encontrado.");
             } catch(GlobalException ex){
-                java.util.logging.Logger.getLogger(ServicioAvion.class.getName()).log(Level.SEVERE, null, ex);
+                java.util.logging.Logger.getLogger(ServicioUsuario.class.getName()).log(Level.SEVERE, null, ex);
             }
         } catch(SQLException e){
             try{
                 throw new NoDataException("Error: Base de datos no se encuentra disponible.");
             }catch(NoDataException ex){
-                java.util.logging.Logger.getLogger(ServicioAvion.class.getName()).log(Level.SEVERE, null, ex);
+                java.util.logging.Logger.getLogger(ServicioUsuario.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         CallableStatement pstmt = null;
         try{
-            pstmt = conexion.prepareCall(INSERTAR_AVION);
-            pstmt.setString(1,avion.getIdentificador());
-            pstmt.setInt(2,avion.getAnio());
-            pstmt.setString(3,avion.getMarca());
-            pstmt.setString(4,avion.getModelo());
-            pstmt.setInt(5,avion.getCantPasajeros());
-            pstmt.setInt(6,avion.getCantFilas());
-            pstmt.setInt(7,avion.getCantAsientos());
+            pstmt = conexion.prepareCall(INSERTAR_USUARIO);
+            pstmt.setString(1,usuario.getIdUsuario());
+            pstmt.setString(2,usuario.getUsuario());
+            pstmt.setString(3,usuario.getContrasenia());
+            pstmt.setInt(4,usuario.getTipo());
             
             boolean resultado = pstmt.execute();
             if(resultado){
                 try{
                     throw new NoDataException("Error: No se realizó la inserción.");
                 }catch(NoDataException ex){
-                    Logger.getLogger(ServicioAvion.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(ServicioUsuario.class.getName()).log(Level.SEVERE, null, ex);
                 }
             } 
         }catch(SQLException e){
             try{
-                throw new GlobalException("Error: Llave primaria de la avión a ingresar ya exíste.");
+                throw new GlobalException("Error: Llave primaria del usuario a ingresar ya exíste.");
             }catch(GlobalException ex){
-                Logger.getLogger(ServicioAvion.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ServicioUsuario.class.getName()).log(Level.SEVERE, null, ex);
             }
         }finally{
             try{
@@ -80,33 +76,33 @@ public class ServicioAvion extends Servicio{
                 try{
                     throw new GlobalException("Error: Estatutos invalidos o nulos.");
                 }catch(GlobalException ex){
-                    Logger.getLogger(ServicioAvion.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(ServicioUsuario.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
     }
     
     
-    public void eliminarAvion(String identificador) throws GlobalException{
+    public void eliminarUsuario(String identificador) throws GlobalException{
         try{
             Conectar();
         }catch(ClassNotFoundException e){
             try{
                 throw new GlobalException("Error: Driver para establecer conexión, no se ha encontrado.");
             }catch(GlobalException ex){
-                Logger.getLogger(ServicioAvion.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ServicioUsuario.class.getName()).log(Level.SEVERE, null, ex);
             }
         }catch(SQLException e){
             try{
                 throw new NoDataException("Error: Base de datos no se encuentra disponible.");
             }catch(NoDataException ex){
-                Logger.getLogger(ServicioAvion.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ServicioUsuario.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         CallableStatement pstmt = null;
         
         try{
-            pstmt = conexion.prepareCall(ELIMINAR_AVION);
+            pstmt = conexion.prepareCall(ELIMINAR_USUARIO);
             pstmt.setString(1, identificador);
             
             boolean resultado = pstmt.execute();
@@ -114,14 +110,14 @@ public class ServicioAvion extends Servicio{
                 try{
                     throw new NoDataException("Error: No se realizó la eliminación.");
                 }catch(NoDataException ex){
-                    Logger.getLogger(ServicioAvion.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(ServicioUsuario.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }catch(SQLException e){
             try{
-                throw new GlobalException("Error: Avión a elimiar está ligada a otras tablas.");
+                throw new GlobalException("Error: Usuario a elimiar está ligado a otras tablas.");
             }catch(GlobalException ex){
-                Logger.getLogger(ServicioAvion.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ServicioUsuario.class.getName()).log(Level.SEVERE, null, ex);
             }
         }finally{
             try{
@@ -133,54 +129,51 @@ public class ServicioAvion extends Servicio{
                 try{
                     throw new GlobalException("Error: Estatutos invalidos o nulos.");
                 }catch(GlobalException ex){
-                    Logger.getLogger(ServicioAvion.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(ServicioUsuario.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
     }
     
     
-    public void modificarAvion(Avion avion){
+    public void modificarUsuario(Usuario usuario){
         try{
             Conectar();
         }catch(ClassNotFoundException e){
             try{
                 throw new GlobalException("Error: Driver para establecer conexión, no se ha encontrado.");
             }catch(GlobalException ex){
-                Logger.getLogger(ServicioAvion.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ServicioUsuario.class.getName()).log(Level.SEVERE, null, ex);
             }
         }catch(SQLException e){
             try{
                 throw new NoDataException("Error: Base de datos no se encuentra disponible.");
             }catch(NoDataException ex){
-                Logger.getLogger(ServicioAvion.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ServicioUsuario.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         CallableStatement pstmt = null;
         
         try{
-            pstmt = conexion.prepareCall(MODIFICAR_AVION);
-            pstmt.setString(1,avion.getIdentificador());
-            pstmt.setInt(2,avion.getAnio());
-            pstmt.setString(3,avion.getMarca());
-            pstmt.setString(4,avion.getModelo());
-            pstmt.setInt(5,avion.getCantPasajeros());
-            pstmt.setInt(6,avion.getCantFilas());
-            pstmt.setInt(7,avion.getCantAsientos());
+            pstmt = conexion.prepareCall(MODIFICAR_USUARIO);
+            pstmt.setString(1,usuario.getIdUsuario());
+            pstmt.setString(2,usuario.getUsuario());
+            pstmt.setString(3,usuario.getContrasenia());
+            pstmt.setInt(4,usuario.getTipo());
             
             boolean resultado = pstmt.execute();
             if(resultado){
                 try{
                     throw new NoDataException("Error: No se realizó la modificación.");
                 }catch(NoDataException ex){
-                    Logger.getLogger(ServicioAvion.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(ServicioUsuario.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }catch(SQLException e){
             try{
-                throw new GlobalException("Error: Problema al realizar la modificación del avión.");
+                throw new GlobalException("Error: Problema al realizar la modificación del usuario.");
             }catch(GlobalException ex){
-                Logger.getLogger(ServicioAvion.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ServicioUsuario.class.getName()).log(Level.SEVERE, null, ex);
             }
         }finally{
             try{
@@ -192,53 +185,50 @@ public class ServicioAvion extends Servicio{
                 try{
                     throw new GlobalException("Error: Estatutos invalidos o nulos.");
                 }catch(GlobalException ex){
-                    Logger.getLogger(ServicioAvion.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(ServicioUsuario.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
     }
     
-    public ArrayList<Avion> listarAviones(){
+    public ArrayList<Usuario> listarUsuarios(){
         try{
             Conectar();
         }catch(ClassNotFoundException e){
             try{
                 throw new GlobalException("Error: Driver para establecer conexión, no se ha encontrado.");
             }catch(GlobalException ex){
-                Logger.getLogger(ServicioAvion.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ServicioUsuario.class.getName()).log(Level.SEVERE, null, ex);
             }
         }catch(SQLException e){
             try{
                 throw new NoDataException("Error: Base de datos no se encuentra disponible.");
             }catch(NoDataException ex){
-                Logger.getLogger(ServicioAvion.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ServicioUsuario.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         ResultSet rs = null;
-        ArrayList<Avion> coleccion = new ArrayList<>();
-        Avion avion = null;
+        ArrayList<Usuario> coleccion = new ArrayList<>();
+        Usuario usuario = null;
         CallableStatement pstmt = null;
         try{
-            pstmt = conexion.prepareCall(LISTAR_AVIONES);
+            pstmt = conexion.prepareCall(LISTAR_USUARIOS);
             pstmt.registerOutParameter(1, OracleTypes.CURSOR);
             pstmt.execute();
             rs = (ResultSet) pstmt.getObject(1);
             while(rs.next()){
-                avion = new Avion(
-                        rs.getString("idAvion"),
-                        rs.getInt("anio"),
-                        rs.getString("marca"),
-                        rs.getString("modelo"),
-                        rs.getInt("cantPasajeros"),
-                        rs.getInt("cantFilas"),
-                        rs.getInt("cantAsientos"));
-                coleccion.add(avion);
+                usuario = new Usuario(
+                        rs.getString("idUser"),
+                        rs.getString("usuario"),
+                        rs.getString("contrasenia"),
+                        rs.getInt("tipo"));
+                coleccion.add(usuario);
             }
         }catch(SQLException e){
             try{
-                throw new GlobalException("Error: Problema al realizar el listado de las aviones.");
+                throw new GlobalException("Error: Problema al realizar el listado de los usuarios.");
             }catch(GlobalException ex){
-                Logger.getLogger(ServicioAvion.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ServicioUsuario.class.getName()).log(Level.SEVERE, null, ex);
             }
         }finally{
             try{
@@ -253,53 +243,50 @@ public class ServicioAvion extends Servicio{
                 try{
                     throw new GlobalException("Error: Estatutos invalidos o nulos.");
                 }catch(GlobalException ex){
-                    Logger.getLogger(ServicioAvion.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(ServicioUsuario.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
         return coleccion;
     }
     
-    public Avion consultarAvion(String identificador){
+    public Usuario consultarUsuario(String identificador){
         try{
             Conectar();
         }catch(ClassNotFoundException e){
             try{
                 throw new GlobalException("Error: Driver para establecer conexión, no se ha encontrado.");
             }catch(GlobalException ex){
-                Logger.getLogger(ServicioAvion.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ServicioUsuario.class.getName()).log(Level.SEVERE, null, ex);
             }
         }catch(SQLException e){
             try{
                 throw new NoDataException("Error: Base de datos no se encuentra disponible.");
             }catch(NoDataException ex){
-                Logger.getLogger(ServicioAvion.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ServicioUsuario.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         ResultSet rs = null;
-        Avion avion = null;
+        Usuario usuario = null;
         CallableStatement pstmt = null;
         try{
-            pstmt = conexion.prepareCall(CONSULTAR_AVION);
+            pstmt = conexion.prepareCall(CONSULTAR_USUARIO);
             pstmt.registerOutParameter(1, OracleTypes.CURSOR);
             pstmt.setString(2, identificador);
             pstmt.execute();
             rs = (ResultSet) pstmt.getObject(1);
             rs.next();
-            avion = new Avion(
-                    rs.getString("idAvion"),
-                    rs.getInt("anio"),
-                    rs.getString("marca"),
-                    rs.getString("modelo"),
-                    rs.getInt("cantPasajeros"),
-                    rs.getInt("cantFilas"),
-                    rs.getInt("cantAsientos"));
+            usuario = new Usuario(
+                    rs.getString("idUser"),
+                    rs.getString("usuario"),
+                    rs.getString("contrasenia"),
+                    rs.getInt("tipo"));
             
         }catch(SQLException e){
             try{
-                throw new GlobalException("Error: Problema al realizar la consulta del avión.");
+                throw new GlobalException("Error: Problema al realizar la consulta del usuario.");
             }catch(GlobalException ex){
-                Logger.getLogger(ServicioAvion.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ServicioUsuario.class.getName()).log(Level.SEVERE, null, ex);
             }
         }finally{
             try{
@@ -314,10 +301,10 @@ public class ServicioAvion extends Servicio{
                 try{
                     throw new GlobalException("Error: Estatutos invalidos o nulos.");
                 }catch(GlobalException ex){
-                    Logger.getLogger(ServicioAvion.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(ServicioUsuario.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
-        return avion;
+        return usuario;
     }
 }
