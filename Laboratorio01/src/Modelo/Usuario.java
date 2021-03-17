@@ -72,4 +72,9 @@ public class Usuario {
         return "";
     }
     
+    @Override
+    public String toString() {
+        return "Usuario{" + "idUsuario=" + idUsuario + ", usuario=" + usuario + ", contrasenia=" + contrasenia + ", tipo=" + tipo + '}';
+    }
+    
 }

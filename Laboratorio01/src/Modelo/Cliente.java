@@ -21,6 +21,19 @@ public class Cliente extends Usuario{
     private String telefono;
     private String celular;
     
+    public Cliente(String idCliente, String nombre, String primerApellido, String segundoApellido, String fechaNacimiento, String correo, String direccion, String telefono, String celular) {
+        super(idCliente, "", "", 1);
+        this.idCliente = idCliente;
+        this.nombre = nombre;
+        this.primerApellido = primerApellido;
+        this.segundoApellido = segundoApellido;
+        this.fechaNacimiento = fechaNacimiento;
+        this.correo = correo;
+        this.direccion = direccion;
+        this.telefono = telefono;
+        this.celular = celular;
+    }
+    
     public Cliente(String idCliente, String nombre, String primerApellido, String segundoApellido, String fechaNacimiento,
             String correo, String direccion, String telefono, String celular, String usuario, String contrasenia) {
         super(idCliente, usuario, contrasenia, 1);
@@ -34,6 +47,9 @@ public class Cliente extends Usuario{
         this.telefono = telefono;
         this.celular = celular;
     }
+    
+    
+    
 
     public String getIdCliente() {
         return idCliente;
@@ -105,5 +121,14 @@ public class Cliente extends Usuario{
 
     public void setCelular(String celular) {
         this.celular = celular;
+    }
+    
+    @Override
+    public String toString() {
+        return "Cliente{" + "idCliente=" + idCliente + ", nombre=" + nombre + ", primerApellido=" + primerApellido + ", segundoApellido=" + segundoApellido + ", fechaNacimiento=" + fechaNacimiento + ", correo=" + correo + ", direccion=" + direccion + ", telefono=" + telefono + ", celular=" + celular + '}';
+    }
+    
+    public String toStringSuper(){
+        return super.toString();
     }
 }
