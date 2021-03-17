@@ -111,7 +111,7 @@ public class Ruta {
     }
 
     public String getHoraLlegada() {
-        return horaLlegada;
+        return horaLlegada.length() > 0 ? horaLlegada : calcularHoraLlegada(hora, minutos, duracionHoras, duracionMinutos);
     }
 
     public void setHoraLlegada(String horaLlegada) {
