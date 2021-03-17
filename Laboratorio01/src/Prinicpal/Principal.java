@@ -19,7 +19,7 @@ public class Principal {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Ruta ruta = new Ruta("","","",13,1,"Lunes",2,1,"");
+        Ruta ruta = new Ruta("","","",23,1,"Lunes",5,1);
         System.out.print(ruta.getHoraLlegada());
         
         //Cambiar a public la clase Servici.java
