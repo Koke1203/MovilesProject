@@ -226,7 +226,7 @@ public class ServicioRuta extends Servicio{
             pstmt = conexion.prepareCall(LISTAR_RUTAS);
             pstmt.registerOutParameter(1, OracleTypes.CURSOR);
             pstmt.execute();
-            rs = (ResultSet) pstmt.getObject(0);
+            rs = (ResultSet) pstmt.getObject(1);
             while(rs.next()){
                 ruta = new Ruta(
                         rs.getString("idRuta"),

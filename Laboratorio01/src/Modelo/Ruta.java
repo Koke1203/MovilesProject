@@ -10,7 +10,7 @@ package Modelo;
  * @author groya
  */
 public class Ruta {
-  
+ 
     private String idRuta;
     private String origen;
     private String destino;
@@ -139,6 +139,11 @@ public class Ruta {
     //60 minutos -> 0 - 59
     private boolean sonMinutosValidos(int minutos){
         return (minutos < 60) && (minutos >= 0);
+    }
+    
+    @Override
+    public String toString() {
+        return "Ruta{" + "idRuta=" + idRuta + ", origen=" + origen + ", destino=" + destino + ", duracionHoras=" + duracionHoras + ", duracionMinutos=" + duracionMinutos + ", diaSemana=" + diaSemana + ", hora=" + hora + ", minutos=" + minutos + ", horaLlegada=" + horaLlegada + '}';
     }
     
     
