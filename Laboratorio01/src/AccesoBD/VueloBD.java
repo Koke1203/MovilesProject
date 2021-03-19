@@ -28,20 +28,20 @@ public class VueloBD extends Servicio{
     
     
     
-    public void insertarRuta(Vuelo vuelo) {
+    public void insertarVuelo(Vuelo vuelo) {
         try {
             Conectar();
         } catch (ClassNotFoundException e) {
             try {
                 throw new GlobalException("No se ha localizado el driver");
             } catch (GlobalException ex) {
-                Logger.getLogger(RutaBD.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(VueloBD.class.getName()).log(Level.SEVERE, null, ex);
             }
         } catch (SQLException e) {
             try {
                 throw new NoDataException("La base de datos no se encuentra disponible");
             } catch (NoDataException ex) {
-                Logger.getLogger(RutaBD.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(VueloBD.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         CallableStatement pstmt = null;
@@ -62,7 +62,7 @@ public class VueloBD extends Servicio{
                 try {
                     throw new NoDataException("No se realizo la inserción");
                 } catch (NoDataException ex) {
-                    Logger.getLogger(RutaBD.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(VueloBD.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
 
@@ -70,7 +70,7 @@ public class VueloBD extends Servicio{
             try {
                 throw new GlobalException("Llave duplicada");
             } catch (GlobalException ex) {
-                Logger.getLogger(RutaBD.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(VueloBD.class.getName()).log(Level.SEVERE, null, ex);
             }
         } finally {
             try {
@@ -82,7 +82,120 @@ public class VueloBD extends Servicio{
                 try {
                     throw new GlobalException("Estatutos invalidos o nulos");
                 } catch (GlobalException ex) {
-                    Logger.getLogger(RutaBD.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(VueloBD.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
+    
+    
+    
+    public void modificarVuelo(Vuelo vuelo) {
+        try {
+            Conectar();
+        } catch (ClassNotFoundException e) {
+            try {
+                throw new GlobalException("No se ha localizado el driver");
+            } catch (GlobalException ex) {
+                Logger.getLogger(VueloBD.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (SQLException e) {
+            try {
+                throw new NoDataException("La base de datos no se encuentra disponible");
+            } catch (NoDataException ex) {
+                Logger.getLogger(VueloBD.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        CallableStatement pstmt = null;
+
+        try {
+            pstmt = conexion.prepareCall(MODIFICARVUELO);
+            pstmt.setString(1, vuelo.getIdVuelo());
+            pstmt.setString(2, vuelo.getFechaIda());
+            pstmt.setString(3, vuelo.getFechaRegreso());
+            pstmt.setInt(4, vuelo.getCantidadPasajeros());
+            pstmt.setDouble(5, vuelo.getPrecio());
+            pstmt.setString(6, vuelo.getAvion());
+            pstmt.setString(7, vuelo.getRuta());
+            boolean resultado = pstmt.execute();
+            if (resultado == true) {
+                try {
+                    throw new NoDataException("No se realizo la inserción");
+                } catch (NoDataException ex) {
+                    Logger.getLogger(VueloBD.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+        } catch (SQLException e) {
+            try {
+                throw new GlobalException("Llave duplicada");
+            } catch (GlobalException ex) {
+                Logger.getLogger(VueloBD.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                Desconectar();
+            } catch (SQLException e) {
+                try {
+                    throw new GlobalException("Estatutos invalidos o nulos");
+                } catch (GlobalException ex) {
+                    Logger.getLogger(VueloBD.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
+    
+    
+    public void eliminarVuelo(String id) {
+        try {
+            Conectar();
+        } catch (ClassNotFoundException e) {
+            try {
+                throw new GlobalException("No se ha localizado el driver");
+            } catch (GlobalException ex) {
+                Logger.getLogger(VueloBD.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (SQLException e) {
+            try {
+                throw new NoDataException("La base de datos no se encuentra disponible");
+            } catch (NoDataException ex) {
+                Logger.getLogger(VueloBD.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        CallableStatement pstmt = null;
+
+        try {
+            pstmt = conexion.prepareCall(ELIMINARVUELO);
+            pstmt.setString(1, id);
+            boolean resultado = pstmt.execute();
+            if (resultado == true) {
+                try {
+                    throw new NoDataException("No se realizo la inserción");
+                } catch (NoDataException ex) {
+                    Logger.getLogger(VueloBD.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+        } catch (SQLException e) {
+            try {
+                throw new GlobalException("Llave duplicada");
+            } catch (GlobalException ex) {
+                Logger.getLogger(VueloBD.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                Desconectar();
+            } catch (SQLException e) {
+                try {
+                    throw new GlobalException("Estatutos invalidos o nulos");
+                } catch (GlobalException ex) {
+                    Logger.getLogger(VueloBD.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
