@@ -53,8 +53,8 @@ public class VueloBD extends Servicio{
             pstmt.setString(3, vuelo.getFechaRegreso());
             pstmt.setInt(4, vuelo.getCantidadPasajeros());
             pstmt.setDouble(5, vuelo.getPrecio());
-            pstmt.setString(6, vuelo.getAvion().getIdentificador());
-            pstmt.setString(7, vuelo.getRuta().getIdRuta());
+            pstmt.setString(6, vuelo.getAvion());
+            pstmt.setString(7, vuelo.getRuta());
        
             
             boolean resultado = pstmt.execute();
