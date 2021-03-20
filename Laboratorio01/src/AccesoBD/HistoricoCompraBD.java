@@ -3,74 +3,67 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Servicios;
+package AccesoBD;
 
 import Excepciones.GlobalException;
 import Excepciones.NoDataException;
-import Modelo.Ruta;
+import Modelo.HistoricoCompra;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import oracle.jdbc.internal.OracleTypes;
+import oracle.jdbc.OracleTypes;
 
 /**
  *
  * @author groya
  */
-public class ServicioRuta extends Servicio{
-    
+public class HistoricoCompraBD extends Servicio{
     //Llamadas a los procedimientos almacenados
-    private static final String INSERTAR_RUTA = "{call INSERTARRUTA(?,?,?,?,?,?,?,?,?)}";
-    private static final String ELIMINAR_RUTA = "{call ELIMINARRUTA(?)}";
-    private static final String MODIFICAR_RUTA = "{call MODIFICARRUTA(?,?,?,?,?,?,?,?,?)}";
-    private static final String CONSULTAR_RUTA = "{?=call CONSULTARRUTA(?)}";
-    private static final String LISTAR_RUTAS = "{?=call LISTARRUTAS()}";
+    private static final String INSERTAR_HISTORICOCOMPRA = "{call INSERTARHISTORICOCOMPRA(?,?,?)}";
+    private static final String ELIMINAR_HISTORICOCOMPRA = "{call ELIMINARHISTORICOCOMPRA(?)}";
+    private static final String MODIFICAR_HISTORICOCOMPRA = "{call MODIFICARHISTORICOCOMPRA(?,?,?)}";
+    private static final String CONSULTAR_HISTORICOCOMPRA = "{?=call CONSULTARHISTORICOCOMPRA(?)}";
+    private static final String LISTAR_HISTORICOCOMPRAS = "{?=call LISTARHISTORICOCOMPRA()}";
     
-    public void insertarRuta(Ruta ruta) throws Exception{
+    public void insertarHistoricoCompra(HistoricoCompra historicoCompra) throws Exception{
         try{
             Conectar();
         }catch(ClassNotFoundException e){
             try{
                 throw new GlobalException("Error: Driver para establecer conexión, no se ha encontrado.");
             } catch(GlobalException ex){
-                java.util.logging.Logger.getLogger(ServicioRuta.class.getName()).log(Level.SEVERE, null, ex);
+                java.util.logging.Logger.getLogger(HistoricoCompraBD.class.getName()).log(Level.SEVERE, null, ex);
             }
         } catch(SQLException e){
             try{
                 throw new NoDataException("Error: Base de datos no se encuentra disponible.");
             }catch(NoDataException ex){
-                java.util.logging.Logger.getLogger(ServicioRuta.class.getName()).log(Level.SEVERE, null, ex);
+                java.util.logging.Logger.getLogger(HistoricoCompraBD.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         CallableStatement pstmt = null;
         try{
-            pstmt = conexion.prepareCall(INSERTAR_RUTA);
-            pstmt.setString(1,ruta.getIdRuta());
-            pstmt.setString(2,ruta.getOrigen());
-            pstmt.setString(3,ruta.getDestino());
-            pstmt.setInt(4,ruta.getDuracionHoras());
-            pstmt.setInt(5,ruta.getDuracionMinutos());
-            pstmt.setString(6,ruta.getDiaSemana());
-            pstmt.setInt(7,ruta.getHora());
-            pstmt.setInt(8,ruta.getMinutos());
-            pstmt.setString(9,ruta.getHoraLlegada());
+            pstmt = conexion.prepareCall(INSERTAR_HISTORICOCOMPRA);
+            pstmt.setString(1,historicoCompra.getIdHistoricoCompra());
+            pstmt.setString(2,historicoCompra.getIdVuelo());
+            pstmt.setString(3,historicoCompra.getIdCliente());
             
             boolean resultado = pstmt.execute();
             if(resultado){
                 try{
                     throw new NoDataException("Error: No se realizó la inserción.");
                 }catch(NoDataException ex){
-                    Logger.getLogger(ServicioRuta.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(HistoricoCompraBD.class.getName()).log(Level.SEVERE, null, ex);
                 }
             } 
         }catch(SQLException e){
             try{
-                throw new GlobalException("Error: Llave primaria de la ruta a ingresar ya exíste.");
+                throw new GlobalException("Error: Llave primaria del historico de compra a ingresar ya exíste.");
             }catch(GlobalException ex){
-                Logger.getLogger(ServicioRuta.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(HistoricoCompraBD.class.getName()).log(Level.SEVERE, null, ex);
             }
         }finally{
             try{
@@ -82,33 +75,33 @@ public class ServicioRuta extends Servicio{
                 try{
                     throw new GlobalException("Error: Estatutos invalidos o nulos.");
                 }catch(GlobalException ex){
-                    Logger.getLogger(ServicioRuta.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(HistoricoCompraBD.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
     }
     
     
-    public void eliminarRuta(String identificador) throws GlobalException{
+    public void eliminarHistoricoCompra(String identificador) throws GlobalException{
         try{
             Conectar();
         }catch(ClassNotFoundException e){
             try{
                 throw new GlobalException("Error: Driver para establecer conexión, no se ha encontrado.");
             }catch(GlobalException ex){
-                Logger.getLogger(ServicioRuta.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(HistoricoCompraBD.class.getName()).log(Level.SEVERE, null, ex);
             }
         }catch(SQLException e){
             try{
                 throw new NoDataException("Error: Base de datos no se encuentra disponible.");
             }catch(NoDataException ex){
-                Logger.getLogger(ServicioRuta.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(HistoricoCompraBD.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         CallableStatement pstmt = null;
         
         try{
-            pstmt = conexion.prepareCall(ELIMINAR_RUTA);
+            pstmt = conexion.prepareCall(ELIMINAR_HISTORICOCOMPRA);
             pstmt.setString(1, identificador);
             
             boolean resultado = pstmt.execute();
@@ -116,14 +109,14 @@ public class ServicioRuta extends Servicio{
                 try{
                     throw new NoDataException("Error: No se realizó la eliminación.");
                 }catch(NoDataException ex){
-                    Logger.getLogger(ServicioRuta.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(HistoricoCompraBD.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }catch(SQLException e){
             try{
-                throw new GlobalException("Error: Ruta a elimiar está ligada a otras tablas.");
+                throw new GlobalException("Error: Historico de compra a elimiar está ligado a otras tablas.");
             }catch(GlobalException ex){
-                Logger.getLogger(ServicioRuta.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(HistoricoCompraBD.class.getName()).log(Level.SEVERE, null, ex);
             }
         }finally{
             try{
@@ -135,56 +128,50 @@ public class ServicioRuta extends Servicio{
                 try{
                     throw new GlobalException("Error: Estatutos invalidos o nulos.");
                 }catch(GlobalException ex){
-                    Logger.getLogger(ServicioRuta.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(HistoricoCompraBD.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
     }
     
     
-    public void modificarRuta(Ruta ruta){
+    public void modificarHistoricoCompra(HistoricoCompra historicoCompra){
         try{
             Conectar();
         }catch(ClassNotFoundException e){
             try{
                 throw new GlobalException("Error: Driver para establecer conexión, no se ha encontrado.");
             }catch(GlobalException ex){
-                Logger.getLogger(ServicioRuta.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(HistoricoCompraBD.class.getName()).log(Level.SEVERE, null, ex);
             }
         }catch(SQLException e){
             try{
                 throw new NoDataException("Error: Base de datos no se encuentra disponible.");
             }catch(NoDataException ex){
-                Logger.getLogger(ServicioRuta.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(HistoricoCompraBD.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         CallableStatement pstmt = null;
         
         try{
-            pstmt = conexion.prepareCall(MODIFICAR_RUTA);
-            pstmt.setString(1,ruta.getIdRuta());
-            pstmt.setString(2,ruta.getOrigen());
-            pstmt.setString(3,ruta.getDestino());
-            pstmt.setInt(4,ruta.getDuracionHoras());
-            pstmt.setInt(5,ruta.getDuracionMinutos());
-            pstmt.setString(6,ruta.getDiaSemana());
-            pstmt.setInt(7,ruta.getHora());
-            pstmt.setInt(8,ruta.getMinutos());
-            pstmt.setString(9,ruta.getHoraLlegada());
+            pstmt = conexion.prepareCall(MODIFICAR_HISTORICOCOMPRA);
+            pstmt.setString(1,historicoCompra.getIdHistoricoCompra());
+            pstmt.setString(2,historicoCompra.getIdVuelo());
+            pstmt.setString(3,historicoCompra.getIdCliente());
             
             boolean resultado = pstmt.execute();
             if(resultado){
                 try{
                     throw new NoDataException("Error: No se realizó la modificación.");
                 }catch(NoDataException ex){
-                    Logger.getLogger(ServicioRuta.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(HistoricoCompraBD.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }catch(SQLException e){
             try{
-                throw new GlobalException("Error: Problema al realizar la modificación de la Ruta.");
+                throw new GlobalException("Error: Problema al realizar la modificación del historico de compra.");
             }catch(GlobalException ex){
-                Logger.getLogger(ServicioRuta.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(HistoricoCompraBD.class.getName()).log(Level.SEVERE, null, ex);
             }
         }finally{
             try{
@@ -196,55 +183,49 @@ public class ServicioRuta extends Servicio{
                 try{
                     throw new GlobalException("Error: Estatutos invalidos o nulos.");
                 }catch(GlobalException ex){
-                    Logger.getLogger(ServicioRuta.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(HistoricoCompraBD.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
     }
     
-    public ArrayList<Ruta> listarRutas(){
+    public ArrayList<HistoricoCompra> listarHistoricoCompras(){
         try{
             Conectar();
         }catch(ClassNotFoundException e){
             try{
                 throw new GlobalException("Error: Driver para establecer conexión, no se ha encontrado.");
             }catch(GlobalException ex){
-                Logger.getLogger(ServicioRuta.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(HistoricoCompraBD.class.getName()).log(Level.SEVERE, null, ex);
             }
         }catch(SQLException e){
             try{
                 throw new NoDataException("Error: Base de datos no se encuentra disponible.");
             }catch(NoDataException ex){
-                Logger.getLogger(ServicioRuta.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(HistoricoCompraBD.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         ResultSet rs = null;
-        ArrayList<Ruta> coleccion = new ArrayList<>();
-        Ruta ruta = null;
+        ArrayList<HistoricoCompra> coleccion = new ArrayList<>();
+        HistoricoCompra historicoCompra = null;
         CallableStatement pstmt = null;
         try{
-            pstmt = conexion.prepareCall(LISTAR_RUTAS);
+            pstmt = conexion.prepareCall(LISTAR_HISTORICOCOMPRAS);
             pstmt.registerOutParameter(1, OracleTypes.CURSOR);
             pstmt.execute();
             rs = (ResultSet) pstmt.getObject(1);
             while(rs.next()){
-                ruta = new Ruta(
-                        rs.getString("idRuta"),
-                        rs.getString("origen"),
-                        rs.getString("destino"),
-                        rs.getInt("duracionHoras"),
-                        rs.getInt("duracionMinutos"),
-                        rs.getString("diaSemana"),
-                        rs.getInt("hora"),
-                        rs.getInt("minutos"),
-                        rs.getString("horaLlegada"));
-                coleccion.add(ruta);
+                historicoCompra = new HistoricoCompra(
+                        rs.getString("IDHISTORICOCOMPRA"),
+                        rs.getString("VUELO_IDVUELO"),
+                        rs.getString("CLIENTE_IDCLIENTE"));
+                coleccion.add(historicoCompra);
             }
         }catch(SQLException e){
             try{
-                throw new GlobalException("Error: Problema al realizar el listado de las rutas.");
+                throw new GlobalException("Error: Problema al realizar el listado de los historicos de compra.");
             }catch(GlobalException ex){
-                Logger.getLogger(ServicioRuta.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(HistoricoCompraBD.class.getName()).log(Level.SEVERE, null, ex);
             }
         }finally{
             try{
@@ -259,56 +240,49 @@ public class ServicioRuta extends Servicio{
                 try{
                     throw new GlobalException("Error: Estatutos invalidos o nulos.");
                 }catch(GlobalException ex){
-                    Logger.getLogger(ServicioRuta.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(HistoricoCompraBD.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
         return coleccion;
     }
     
-    public Ruta consultarRuta(String identificador){
+    public HistoricoCompra consultarHistoricoCompra(String identificador){
         try{
             Conectar();
         }catch(ClassNotFoundException e){
             try{
                 throw new GlobalException("Error: Driver para establecer conexión, no se ha encontrado.");
             }catch(GlobalException ex){
-                Logger.getLogger(ServicioRuta.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(HistoricoCompraBD.class.getName()).log(Level.SEVERE, null, ex);
             }
         }catch(SQLException e){
             try{
                 throw new NoDataException("Error: Base de datos no se encuentra disponible.");
             }catch(NoDataException ex){
-                Logger.getLogger(ServicioRuta.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(HistoricoCompraBD.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         ResultSet rs = null;
-        Ruta ruta = null;
+        HistoricoCompra historicoCompra = null;
         CallableStatement pstmt = null;
         try{
-            pstmt = conexion.prepareCall(CONSULTAR_RUTA);
+            pstmt = conexion.prepareCall(CONSULTAR_HISTORICOCOMPRA);
             pstmt.registerOutParameter(1, OracleTypes.CURSOR);
             pstmt.setString(2, identificador);
             pstmt.execute();
             rs = (ResultSet) pstmt.getObject(1);
             rs.next();
-            ruta = new Ruta(
-                rs.getString("idRuta"),
-                rs.getString("origen"),
-                rs.getString("destino"),
-                rs.getInt("duracionHoras"),
-                rs.getInt("duracionMinutos"),
-                rs.getString("diaSemana"),
-                rs.getInt("hora"),
-                rs.getInt("minutos"),
-                rs.getString("horaLlegada")
-            );
+            historicoCompra = new HistoricoCompra(
+                    rs.getString("IDHISTORICOCOMPRA"),
+                    rs.getString("VUELO_IDVUELO"),
+                    rs.getString("CLIENTE_IDCLIENTE"));
             
         }catch(SQLException e){
             try{
-                throw new GlobalException("Error: Problema al realizar la consulta de la ruta.");
+                throw new GlobalException("Error: Problema al realizar la consulta del historico de compra.");
             }catch(GlobalException ex){
-                Logger.getLogger(ServicioRuta.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(HistoricoCompraBD.class.getName()).log(Level.SEVERE, null, ex);
             }
         }finally{
             try{
@@ -323,10 +297,10 @@ public class ServicioRuta extends Servicio{
                 try{
                     throw new GlobalException("Error: Estatutos invalidos o nulos.");
                 }catch(GlobalException ex){
-                    Logger.getLogger(ServicioRuta.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(HistoricoCompraBD.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
-        return ruta;
+        return historicoCompra;
     }
-}   
+}

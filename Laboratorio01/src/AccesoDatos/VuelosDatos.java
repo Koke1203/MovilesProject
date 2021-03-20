@@ -6,7 +6,11 @@
 package AccesoDatos;
 
 import AccesoBD.VueloBD;
+import Excepciones.GlobalException;
 import Modelo.Vuelo;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -31,7 +35,11 @@ public class VuelosDatos {
     
     /*************************INSERTAR VUELO*****************/
     public void insertarVuelo(Vuelo vuelo){
-        sVuelo.insertarVuelo(vuelo);
+        try {
+            sVuelo.insertarVuelo(vuelo);
+        } catch (Exception ex) {
+            Logger.getLogger(VuelosDatos.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     /*************************MODIFICAR VUELO*****************/
     public void modificarVuelo(Vuelo vuelo){
@@ -40,7 +48,22 @@ public class VuelosDatos {
     
     /*************************ELIMINAR VUELO*****************/
     public void eliminarVuelo(String idVuelo){
-        sVuelo.eliminarVuelo(idVuelo);
+        try {
+            sVuelo.eliminarVuelo(idVuelo);
+        } catch (GlobalException ex) {
+            Logger.getLogger(VuelosDatos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    /*************************LISTAR VUELOS*****************/
+    
+    public ArrayList<Vuelo> listarVuelos(){
+        return sVuelo.listarVuelos();
+    }
+        
+    /*************************CONSULTAR VUELO*****************/
+    public Vuelo conultarVuelo(String idVuelo){
+        return sVuelo.consultarVuelo(idVuelo);
     }
 
 }

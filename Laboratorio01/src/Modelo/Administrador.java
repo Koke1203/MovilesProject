@@ -15,4 +15,5 @@ public class Administrador extends Usuario{
         super(idUsuario, usuario, contrasenia, 0);
     }
     
+    
 }

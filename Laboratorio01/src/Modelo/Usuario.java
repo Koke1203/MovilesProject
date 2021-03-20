@@ -31,6 +31,8 @@ public class Usuario {
         this.usuario = usuario;
         this.contrasenia = contrasenia;
         this.tipo = tipo;
+        TIPO_USUARIO.put(0, "Administrador");
+        TIPO_USUARIO.put(1, "Cliente");
     }
     
     public String getIdUsuario() {

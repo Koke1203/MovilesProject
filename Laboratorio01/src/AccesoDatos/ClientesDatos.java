@@ -6,7 +6,11 @@
 package AccesoDatos;
 
 import AccesoBD.ClienteBD;
+import Excepciones.GlobalException;
 import Modelo.Cliente;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -29,7 +33,11 @@ public class ClientesDatos {
     
     /*************************INSERTAR CLIENTE*****************/
     public void insertarCliente(Cliente cliente){
-        sCliente.insertarCliente(cliente);
+        try {
+            sCliente.insertarCliente(cliente);
+        } catch (Exception ex) {
+            Logger.getLogger(ClientesDatos.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     /*************************MODIFICAR CLIENTE*****************/
     public void modificarCliente(Cliente cliente){
@@ -38,7 +46,20 @@ public class ClientesDatos {
     
     /*************************ELIMINAR CLIENTE*****************/
     public void eliminarCliente(String idCliente){
-        sCliente.eliminarCliente(idCliente);
+        try {
+            sCliente.eliminarCliente(idCliente);
+        } catch (GlobalException ex) {
+            Logger.getLogger(ClientesDatos.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
+    /*************************LISTAR CLIENTES*****************/
+    private ArrayList<Cliente> listarClientes(){
+        return sCliente.listarClientes();
+    }
+    
+    /*************************CONSULTAR CLIENTE*****************/
+    private Cliente consultarCliente(String idCliente){
+        return sCliente.consultarCliente(idCliente);
+    }
 }

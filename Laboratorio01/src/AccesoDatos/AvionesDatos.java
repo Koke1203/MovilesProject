@@ -6,7 +6,11 @@
 package AccesoDatos;
 
 import AccesoBD.AvionBD;
+import Excepciones.GlobalException;
 import Modelo.Avion;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -30,7 +34,11 @@ public class AvionesDatos {
     
     /*************************INSERTAR AVION*****************/
     public void insertarAvion(Avion avion){
-        sAvion.insertarAvion(avion);
+        try {
+            sAvion.insertarAvion(avion);
+        } catch (Exception ex) {
+            Logger.getLogger(AvionesDatos.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     /*************************MODIFICAR AVION*****************/
     public void modificarAvion(Avion avion){
@@ -39,7 +47,22 @@ public class AvionesDatos {
     
     /*************************ELIMINAR AVION*****************/
     public void eliminarAvion(String idAvion){
-        sAvion.eliminarAvion(idAvion);
+        try {
+            sAvion.eliminarAvion(idAvion);
+        } catch (GlobalException ex) {
+            Logger.getLogger(AvionesDatos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+        /*************************LISTAR AVIONES*****************/
+    
+    public ArrayList<Avion> listarAviones(){
+        return sAvion.listarAviones();
+    }
+        
+    /*************************CONSULTAR AVION*****************/
+    public Avion consultarAvion(String idAvion){
+        return sAvion.consultarAvion(idAvion);
     }
     
     

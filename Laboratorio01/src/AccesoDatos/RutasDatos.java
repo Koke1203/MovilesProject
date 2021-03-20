@@ -6,7 +6,11 @@
 package AccesoDatos;
 
 import AccesoBD.RutaBD;
+import Excepciones.GlobalException;
 import Modelo.Ruta;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -32,7 +36,11 @@ public class RutasDatos {
     
         /*************************INSERTAR RUTA*****************/
     public void insertarRuta(Ruta ruta){
-        sRuta.insertarRuta(ruta);
+        try {
+            sRuta.insertarRuta(ruta);
+        } catch (Exception ex) {
+            Logger.getLogger(RutasDatos.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     /*************************MODIFICAR RUTA*****************/
     public void modificarRuta(Ruta ruta){
@@ -41,8 +49,21 @@ public class RutasDatos {
     
     /*************************ELIMINAR RUTA*****************/
     public void eliminarRuta(String idRuta){
-        sRuta.eliminarRuta(idRuta);
+        try {
+            sRuta.eliminarRuta(idRuta);
+        } catch (GlobalException ex) {
+            Logger.getLogger(RutasDatos.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
+    /*************************LISTAR RUTAS*****************/
+    public ArrayList<Ruta> listarRutas(){
+        return sRuta.listarRutas();
+    }
+    
+    /*************************CONSULTAR RUTA*****************/
+    public Ruta consultarRuta(String idRuta){
+        return sRuta.consultarRuta(idRuta);
+    }
     
 }
