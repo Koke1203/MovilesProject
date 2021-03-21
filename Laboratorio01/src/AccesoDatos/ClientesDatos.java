@@ -31,35 +31,39 @@ public class ClientesDatos {
         sCliente = new ClienteBD();
     }
     
-    /*************************INSERTAR CLIENTE*****************/
-    public void insertarCliente(Cliente cliente){
-        try {
-            sCliente.insertarCliente(cliente);
-        } catch (Exception ex) {
-            Logger.getLogger(ClientesDatos.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    /**
+     * ***********************INSERTAR CLIENTE****************
+     */
+    public void insertarCliente(Cliente cliente) throws Exception {
+        sCliente.insertarCliente(cliente);
     }
-    /*************************MODIFICAR CLIENTE*****************/
-    public void modificarCliente(Cliente cliente){
+
+    /**
+     * ***********************MODIFICAR CLIENTE****************
+     */
+    public void modificarCliente(Cliente cliente) {
         sCliente.modificarCliente(cliente);
     }
-    
-    /*************************ELIMINAR CLIENTE*****************/
-    public void eliminarCliente(String idCliente){
-        try {
-            sCliente.eliminarCliente(idCliente);
-        } catch (GlobalException ex) {
-            Logger.getLogger(ClientesDatos.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
+    /**
+     * ***********************ELIMINAR CLIENTE****************
+     */
+    public void eliminarCliente(String idCliente) throws GlobalException {
+
+        sCliente.eliminarCliente(idCliente);
     }
-    
-    /*************************LISTAR CLIENTES*****************/
-    private ArrayList<Cliente> listarClientes(){
+
+    /**
+     * ***********************LISTAR CLIENTES****************
+     */
+    private ArrayList<Cliente> listarClientes() {
         return sCliente.listarClientes();
     }
-    
-    /*************************CONSULTAR CLIENTE*****************/
-    private Cliente consultarCliente(String idCliente){
+
+    /**
+     * ***********************CONSULTAR CLIENTE****************
+     */
+    private Cliente consultarCliente(String idCliente) {
         return sCliente.consultarCliente(idCliente);
     }
 }

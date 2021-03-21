@@ -33,35 +33,38 @@ public class HistoricoCompraDatos {
     }
     
     
-        /*************************INSERTAR HISTORICO COMPRA*****************/
-    public void insertarHistoricoCompra(HistoricoCompra historicoCompra){
-        try {
-            sHistoricoCompra.insertarHistoricoCompra(historicoCompra);
-        } catch (Exception ex) {
-            Logger.getLogger(HistoricoCompraDatos.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    /**
+     * ***********************INSERTAR HISTORICO COMPRA****************
+     */
+    public void insertarHistoricoCompra(HistoricoCompra historicoCompra) throws Exception {
+        sHistoricoCompra.insertarHistoricoCompra(historicoCompra);
     }
-    /*************************MODIFICAR HISTORICO COMPRA*****************/
-    public void modificarRuta(HistoricoCompra historicoCompra){
+
+    /**
+     * ***********************MODIFICAR HISTORICO COMPRA****************
+     */
+    public void modificarRuta(HistoricoCompra historicoCompra) {
         sHistoricoCompra.modificarHistoricoCompra(historicoCompra);
     }
-    
-    /*************************ELIMINAR HISTORICO COMPRA*****************/
-    public void eliminarHistoricoCompra(String idHistoricoCompra){
-        try {
-            sHistoricoCompra.eliminarHistoricoCompra(idHistoricoCompra);
-        } catch (GlobalException ex) {
-            Logger.getLogger(HistoricoCompraDatos.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
+    /**
+     * ***********************ELIMINAR HISTORICO COMPRA****************
+     */
+    public void eliminarHistoricoCompra(String idHistoricoCompra) throws GlobalException {
+        sHistoricoCompra.eliminarHistoricoCompra(idHistoricoCompra);
     }
-    
-    /*************************LISTAR HISTORICOS DE COMPRA*****************/
-    public ArrayList<HistoricoCompra> listarHistoricosCompra(){
+
+    /**
+     * ***********************LISTAR HISTORICOS DE COMPRA****************
+     */
+    public ArrayList<HistoricoCompra> listarHistoricosCompra() {
         return sHistoricoCompra.listarHistoricoCompras();
     }
-    
-    /*************************CONSULTAR HISTORICO COMPRA*****************/
-    public HistoricoCompra consultarRuta(String idHistoricoCompra){
+
+    /**
+     * ***********************CONSULTAR HISTORICO COMPRA****************
+     */
+    public HistoricoCompra consultarRuta(String idHistoricoCompra) {
         return sHistoricoCompra.consultarHistoricoCompra(idHistoricoCompra);
     }
 }

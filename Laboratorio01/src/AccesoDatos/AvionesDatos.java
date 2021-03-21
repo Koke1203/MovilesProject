@@ -31,37 +31,38 @@ public class AvionesDatos {
         sAvion = new AvionBD();
     }
     
-    
-    /*************************INSERTAR AVION*****************/
-    public void insertarAvion(Avion avion){
-        try {
-            sAvion.insertarAvion(avion);
-        } catch (Exception ex) {
-            Logger.getLogger(AvionesDatos.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    /**
+     * ***********************INSERTAR AVION****************
+     */
+    public void insertarAvion(Avion avion) throws Exception {
+        sAvion.insertarAvion(avion);
     }
-    /*************************MODIFICAR AVION*****************/
-    public void modificarAvion(Avion avion){
+
+    /**
+     * ***********************MODIFICAR AVION****************
+     */
+    public void modificarAvion(Avion avion) {
         sAvion.modificarAvion(avion);
     }
-    
-    /*************************ELIMINAR AVION*****************/
-    public void eliminarAvion(String idAvion){
-        try {
-            sAvion.eliminarAvion(idAvion);
-        } catch (GlobalException ex) {
-            Logger.getLogger(AvionesDatos.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
+    /**
+     * ***********************ELIMINAR AVION****************
+     */
+    public void eliminarAvion(String idAvion) throws GlobalException {
+        sAvion.eliminarAvion(idAvion);
     }
-    
-        /*************************LISTAR AVIONES*****************/
-    
-    public ArrayList<Avion> listarAviones(){
+
+    /**
+     * ***********************LISTAR AVIONES****************
+     */
+    public ArrayList<Avion> listarAviones() {
         return sAvion.listarAviones();
     }
-        
-    /*************************CONSULTAR AVION*****************/
-    public Avion consultarAvion(String idAvion){
+
+    /**
+     * ***********************CONSULTAR AVION****************
+     */
+    public Avion consultarAvion(String idAvion) {
         return sAvion.consultarAvion(idAvion);
     }
     

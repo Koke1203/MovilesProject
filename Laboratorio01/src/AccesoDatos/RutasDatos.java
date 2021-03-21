@@ -34,35 +34,38 @@ public class RutasDatos {
     }
     
     
-        /*************************INSERTAR RUTA*****************/
-    public void insertarRuta(Ruta ruta){
-        try {
-            sRuta.insertarRuta(ruta);
-        } catch (Exception ex) {
-            Logger.getLogger(RutasDatos.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    /**
+     * ***********************INSERTAR RUTA****************
+     */
+    public void insertarRuta(Ruta ruta) throws Exception {
+        sRuta.insertarRuta(ruta);
     }
-    /*************************MODIFICAR RUTA*****************/
-    public void modificarRuta(Ruta ruta){
+
+    /**
+     * ***********************MODIFICAR RUTA****************
+     */
+    public void modificarRuta(Ruta ruta) {
         sRuta.modificarRuta(ruta);
     }
-    
-    /*************************ELIMINAR RUTA*****************/
-    public void eliminarRuta(String idRuta){
-        try {
-            sRuta.eliminarRuta(idRuta);
-        } catch (GlobalException ex) {
-            Logger.getLogger(RutasDatos.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
+    /**
+     * ***********************ELIMINAR RUTA****************
+     */
+    public void eliminarRuta(String idRuta) throws GlobalException {
+        sRuta.eliminarRuta(idRuta);
     }
-    
-    /*************************LISTAR RUTAS*****************/
-    public ArrayList<Ruta> listarRutas(){
+
+    /**
+     * ***********************LISTAR RUTAS****************
+     */
+    public ArrayList<Ruta> listarRutas() {
         return sRuta.listarRutas();
     }
-    
-    /*************************CONSULTAR RUTA*****************/
-    public Ruta consultarRuta(String idRuta){
+
+    /**
+     * ***********************CONSULTAR RUTA****************
+     */
+    public Ruta consultarRuta(String idRuta) {
         return sRuta.consultarRuta(idRuta);
     }
     

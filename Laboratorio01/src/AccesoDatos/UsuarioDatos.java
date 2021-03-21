@@ -32,35 +32,38 @@ public class UsuarioDatos {
         sUsuario = new UsuarioBD();
     }
     
-    /*************************INSERTAR USUARIO*****************/
-    public void insertarUsuario(Usuario usuario){
-        try {
-            sUsuario.insertarUsuario(usuario);
-        } catch (Exception ex) {
-            Logger.getLogger(UsuarioDatos.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    /**
+     * ***********************INSERTAR USUARIO****************
+     */
+    public void insertarUsuario(Usuario usuario) throws Exception {
+        sUsuario.insertarUsuario(usuario);
     }
-    /*************************MODIFICAR USUARIO*****************/
-    public void modificarUsuario(Usuario usuario){
+
+    /**
+     * ***********************MODIFICAR USUARIO****************
+     */
+    public void modificarUsuario(Usuario usuario) {
         sUsuario.modificarUsuario(usuario);
     }
-    
-    /*************************ELIMINAR USUARIO*****************/
-    public void eliminarAdministrador(String idUsuario){
-        try {
-            sUsuario.eliminarUsuario(idUsuario);
-        } catch (GlobalException ex) {
-            Logger.getLogger(UsuarioDatos.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
+    /**
+     * ***********************ELIMINAR USUARIO****************
+     */
+    public void eliminarAdministrador(String idUsuario) throws GlobalException {
+        sUsuario.eliminarUsuario(idUsuario);
     }
-    
-    /*************************LISTAR USUARIOS*****************/
-    public ArrayList<Usuario> listarUsuarios(){
+
+    /**
+     * ***********************LISTAR USUARIOS****************
+     */
+    public ArrayList<Usuario> listarUsuarios() {
         return sUsuario.listarUsuarios();
     }
-    
-    /*************************CONSULTAR USUARIO*****************/
-    public Usuario consultarUsuario(String idUsuario){
+
+    /**
+     * ***********************CONSULTAR USUARIO****************
+     */
+    public Usuario consultarUsuario(String idUsuario) {
         return sUsuario.consultarUsuario(idUsuario);
     }
     
