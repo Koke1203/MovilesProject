@@ -49,7 +49,7 @@ public class UsuarioDatos {
     /**
      * ***********************ELIMINAR USUARIO****************
      */
-    public void eliminarAdministrador(String idUsuario) throws GlobalException {
+    public void eliminarUsuario(String idUsuario) throws GlobalException {
         sUsuario.eliminarUsuario(idUsuario);
     }
 

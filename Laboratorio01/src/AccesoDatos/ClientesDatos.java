@@ -56,14 +56,14 @@ public class ClientesDatos {
     /**
      * ***********************LISTAR CLIENTES****************
      */
-    private ArrayList<Cliente> listarClientes() {
+    public ArrayList<Cliente> listarClientes() {
         return sCliente.listarClientes();
     }
 
     /**
      * ***********************CONSULTAR CLIENTE****************
      */
-    private Cliente consultarCliente(String idCliente) {
+    public Cliente consultarCliente(String idCliente) {
         return sCliente.consultarCliente(idCliente);
     }
 }

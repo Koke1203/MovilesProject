@@ -43,7 +43,7 @@ public class HistoricoCompraDatos {
     /**
      * ***********************MODIFICAR HISTORICO COMPRA****************
      */
-    public void modificarRuta(HistoricoCompra historicoCompra) {
+    public void modificarHistoricoCompra(HistoricoCompra historicoCompra) {
         sHistoricoCompra.modificarHistoricoCompra(historicoCompra);
     }
 
@@ -64,7 +64,7 @@ public class HistoricoCompraDatos {
     /**
      * ***********************CONSULTAR HISTORICO COMPRA****************
      */
-    public HistoricoCompra consultarRuta(String idHistoricoCompra) {
+    public HistoricoCompra consultarHistoricoCompra(String idHistoricoCompra) {
         return sHistoricoCompra.consultarHistoricoCompra(idHistoricoCompra);
     }
 }
