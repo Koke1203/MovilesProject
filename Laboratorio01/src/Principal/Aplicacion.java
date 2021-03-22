@@ -3,22 +3,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Prinicpal;
+package Principal;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import Controlador.ControladorPrincipal;
+import Modelo.Modelo;
+import Vista.Principal;
 
 /**
  *
  * @author groya
  */
-public class Principal {
+public class Aplicacion {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
+        Modelo modelo = new Modelo();
+        Principal vPrincipal = new Principal();
+        ControladorPrincipal controlador = new ControladorPrincipal(modelo, vPrincipal);
     }
     
 }

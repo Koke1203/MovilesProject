@@ -240,7 +240,7 @@ public class ClienteBD extends Servicio {
                     rs.getString("correo"),
                     rs.getString("direccion"),
                     rs.getString("telefono"),
-                    rs.getString("celular")
+                    rs.getString("celular"),""
                 );
                 coleccion.add(cliente);
             }
@@ -313,7 +313,7 @@ public class ClienteBD extends Servicio {
                 rs.getString("correo"),
                 rs.getString("direccion"),
                 rs.getString("telefono"),
-                rs.getString("celular")
+                rs.getString("celular"),""
             );
             
             UsuarioBD servUsuario = new UsuarioBD();

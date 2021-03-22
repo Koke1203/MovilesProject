@@ -5,18 +5,81 @@
  */
 package Vista;
 
+import Controlador.ControladorPrincipal;
+import Modelo.Modelo;
+import java.util.Observable;
+import java.util.Observer;
+import javax.swing.JButton;
+import javax.swing.JTable;
+import javax.swing.WindowConstants;
+
 /**
  *
  * @author jorge
  */
-public class Principal extends javax.swing.JFrame {
+public class Principal extends javax.swing.JFrame implements Observer{
 
-    /**
-     * Creates new form Principal
-     */
+    
+    private ControladorPrincipal controlador;
+    private Modelo modelo;
+    private String seleccion;
+    
     public Principal() {
         initComponents();
+        configurarComponentes();
     }
+    
+    public void configurarComponentes(){
+        this.setVisible(true);
+        this.setLocationRelativeTo(null);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);        
+    }
+    
+    public void setControlador(ControladorPrincipal controlador) {
+        this.controlador = controlador;
+        //Action Listener
+        btnInicioSesion.addActionListener(controlador);
+        btnRegistro.addActionListener(controlador);
+        
+    }
+    
+    public void setModelo(Modelo modelo){
+        this.modelo = modelo;
+        this.modelo.addObserver(this);
+    }
+
+    public JButton getBtnInicioSesion() {
+        return btnInicioSesion;
+    }
+
+    public void setBtnInicioSesion(JButton btnInicioSesion) {
+        this.btnInicioSesion = btnInicioSesion;
+    }
+
+    public JButton getBtnRegistro() {
+        return btnRegistro;
+    }
+
+    public void setBtnRegistro(JButton btnRegistro) {
+        this.btnRegistro = btnRegistro;
+    }
+
+    public JTable getTableVuelos() {
+        return tableVuelos;
+    }
+
+    public void setTableVuelos(JTable tableVuelos) {
+        this.tableVuelos = tableVuelos;
+    }
+    
+    @Override
+    public void update(Observable o, Object o1) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -27,17 +90,100 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        panelPrincipal = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tableVuelos = new javax.swing.JTable();
+        btnInicioSesion = new javax.swing.JButton();
+        btnRegistro = new javax.swing.JButton();
+        panelBusqueda = new javax.swing.JPanel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        tableVuelos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "ID Vuelo", "Origen", "Destino", "Fecha salida", "Fecha regreso", "Hora"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, true, true, true, true, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tableVuelos);
+
+        btnInicioSesion.setText("Iniciar Sesión");
+        btnInicioSesion.setActionCommand("IniciarSesion");
+
+        btnRegistro.setText("Registrarse");
+
+        javax.swing.GroupLayout panelBusquedaLayout = new javax.swing.GroupLayout(panelBusqueda);
+        panelBusqueda.setLayout(panelBusquedaLayout);
+        panelBusquedaLayout.setHorizontalGroup(
+            panelBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        panelBusquedaLayout.setVerticalGroup(
+            panelBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 133, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout panelPrincipalLayout = new javax.swing.GroupLayout(panelPrincipal);
+        panelPrincipal.setLayout(panelPrincipalLayout);
+        panelPrincipalLayout.setHorizontalGroup(
+            panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelPrincipalLayout.createSequentialGroup()
+                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPrincipalLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnInicioSesion)
+                        .addGap(28, 28, 28)
+                        .addComponent(btnRegistro))
+                    .addGroup(panelPrincipalLayout.createSequentialGroup()
+                        .addGap(46, 46, 46)
+                        .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 692, Short.MAX_VALUE)
+                            .addComponent(panelBusqueda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap())
+        );
+        panelPrincipalLayout.setVerticalGroup(
+            panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelPrincipalLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnInicioSesion)
+                    .addComponent(btnRegistro))
+                .addGap(79, 79, 79)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(panelBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(58, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(panelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(panelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -78,6 +224,16 @@ public class Principal extends javax.swing.JFrame {
         });
     }
 
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnInicioSesion;
+    private javax.swing.JButton btnRegistro;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel panelBusqueda;
+    private javax.swing.JPanel panelPrincipal;
+    private javax.swing.JTable tableVuelos;
     // End of variables declaration//GEN-END:variables
+
+
 }

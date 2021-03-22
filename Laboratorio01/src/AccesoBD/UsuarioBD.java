@@ -254,17 +254,19 @@ private static final String INSERTAR_USUARIO = "{call INSERTARUSUARIO(?,?,?,?)}"
         try{
             Conectar();
         }catch(ClassNotFoundException e){
-            try{
-                throw new GlobalException("Error: Driver para establecer conexión, no se ha encontrado.");
-            }catch(GlobalException ex){
-                Logger.getLogger(UsuarioBD.class.getName()).log(Level.SEVERE, null, ex);
-            }
+//            try{
+//                throw new GlobalException("Error: Driver para establecer conexión, no se ha encontrado.");
+//            }catch(GlobalException ex){
+//                Logger.getLogger(UsuarioBD.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+            System.out.println("Error: Driver para establecer conexión, no se ha encontrado.");
         }catch(SQLException e){
-            try{
-                throw new NoDataException("Error: Base de datos no se encuentra disponible.");
-            }catch(NoDataException ex){
-                Logger.getLogger(UsuarioBD.class.getName()).log(Level.SEVERE, null, ex);
-            }
+//            try{
+//                throw new NoDataException("Error: Base de datos no se encuentra disponible.");
+//            }catch(NoDataException ex){
+//                Logger.getLogger(UsuarioBD.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+            System.out.println("Error: Base de datos no se encuentra disponible.");
         }
         ResultSet rs = null;
         Usuario usuario = null;
@@ -283,11 +285,13 @@ private static final String INSERTAR_USUARIO = "{call INSERTARUSUARIO(?,?,?,?)}"
                     rs.getInt("tipo"));
             
         }catch(SQLException e){
-            try{
-                throw new GlobalException("Error: Problema al realizar la consulta del usuario.");
-            }catch(GlobalException ex){
-                Logger.getLogger(UsuarioBD.class.getName()).log(Level.SEVERE, null, ex);
-            }
+//            try{
+//                throw new GlobalException("Error: Problema al realizar la consulta del usuario.");
+//            }catch(GlobalException ex){
+//                Logger.getLogger(UsuarioBD.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+            e.printStackTrace();
+            System.out.println("Error: Problema al realizar la consulta del usuario.");
         }finally{
             try{
                 if(rs != null){
@@ -298,11 +302,12 @@ private static final String INSERTAR_USUARIO = "{call INSERTARUSUARIO(?,?,?,?)}"
                 }
                 Desconectar();
             }catch(SQLException e){
-                try{
-                    throw new GlobalException("Error: Estatutos invalidos o nulos.");
-                }catch(GlobalException ex){
-                    Logger.getLogger(UsuarioBD.class.getName()).log(Level.SEVERE, null, ex);
-                }
+//                try{
+//                    throw new GlobalException("Error: Estatutos invalidos o nulos.");
+//                }catch(GlobalException ex){
+//                    Logger.getLogger(UsuarioBD.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+                System.out.println("Error: Estatutos invalidos o nulos.");
             }
         }
         return usuario;

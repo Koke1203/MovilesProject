@@ -21,8 +21,8 @@ public class Cliente extends Usuario{
     private String telefono;
     private String celular;
     
-    public Cliente(String idCliente, String nombre, String primerApellido, String segundoApellido, String fechaNacimiento, String correo, String direccion, String telefono, String celular) {
-        super(idCliente, "", "", 1);
+    public Cliente(String idCliente, String nombre, String primerApellido, String segundoApellido, String fechaNacimiento, String correo, String direccion, String telefono, String celular, String contrasenia) {
+        super(idCliente, "", contrasenia, 1);
         this.idCliente = idCliente;
         this.nombre = nombre;
         this.primerApellido = primerApellido;
