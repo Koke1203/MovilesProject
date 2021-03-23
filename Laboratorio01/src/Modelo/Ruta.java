@@ -132,6 +132,14 @@ public class Ruta {
             return salida;
         }
     }
+    
+    public String obtenerHoraFormato(){
+         String horaFormato = String.format("%2d",hora);
+         String minutosFormato = hora < 9 ? String.format("%02d",hora) : String.format("%2d",hora);
+        return String.format("%s:%s", horaFormato, minutosFormato);
+    }
+    
+    
     //Formato de 24hrs -> 0 - 23
     private boolean esHoraValida(int hora){
         return (hora < 24) && (hora >= 0);

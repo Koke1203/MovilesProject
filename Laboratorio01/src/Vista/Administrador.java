@@ -5,18 +5,48 @@
  */
 package Vista;
 
+import Controlador.ControladorAdministrador;
+import Modelo.Modelo;
+import java.util.Observable;
+import java.util.Observer;
+import javax.swing.WindowConstants;
+
 /**
  *
  * @author jorge
  */
-public class Administrador extends javax.swing.JFrame {
-
-    /**
-     * Creates new form Administrador
-     */
+public class Administrador extends javax.swing.JFrame implements Observer{
+    
+    private ControladorAdministrador controlador;
+    private Modelo modelo;
+    
     public Administrador() {
         initComponents();
+        this.configurarComponentes();
     }
+    
+    public void configurarComponentes(){
+        this.setVisible(true);
+        this.setLocationRelativeTo(null);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);        
+    }
+    
+    public void setControlador(ControladorAdministrador controlador) {
+        this.controlador = controlador;
+        
+        btnAviones.addActionListener(controlador);
+        btnCerrarSesion.addActionListener(controlador);
+        btnEditar.addActionListener(controlador);
+        btnRegistros.addActionListener(controlador);
+        btnRutas.addActionListener(controlador);
+        btnVuelos.addActionListener(controlador);
+    }
+
+    public void setModelo(Modelo modelo) {
+        this.modelo = modelo;
+        modelo.addObserver(this);
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -191,4 +221,10 @@ public class Administrador extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void update(Observable o, Object o1) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

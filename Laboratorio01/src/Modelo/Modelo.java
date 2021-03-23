@@ -8,6 +8,7 @@ package Modelo;
 import AccesoDatos.*;
 import Excepciones.GlobalException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Observable;
 
 /**
@@ -16,6 +17,7 @@ import java.util.Observable;
  */
 public class Modelo extends Observable{
     
+    private String accionGeneral;
     private String accionAvion;
     private String accionRuta;
     private String accionVuelo;
@@ -24,12 +26,22 @@ public class Modelo extends Observable{
     private String accionHistorico;
     
     public Modelo(){
+        this.accionGeneral = ""; 
         this.accionAvion = "";
         this.accionRuta="";
         this.accionVuelo = "";
         this.accionUsuario="";
         this.accionCliente="";
         this.accionHistorico="";
+    }
+    
+    
+    public String getAccionGeneral() {
+        return accionGeneral;
+    }
+
+    public void setAccionGeneral(String accionGeneral) {
+        this.accionGeneral = accionGeneral;
     }
     
     public String getAccionAvion() {
@@ -179,6 +191,31 @@ public class Modelo extends Observable{
     
     public ArrayList<Vuelo> listarVuelos(){
         return VuelosDatos.getInstance().listarVuelos();
+    }
+    
+    public ArrayList<DetalleVuelo> listarDetalleVuelos(){
+        //setAccionGeneral("listarDetalleVuelos");
+        
+        ArrayList<Vuelo> vuelos = listarVuelos();
+        ArrayList<DetalleVuelo> detalles = new ArrayList<DetalleVuelo>();
+        Iterator iterador = vuelos.iterator();
+        Vuelo vuelo = null;
+        Avion avion = null;
+        Ruta ruta = null;
+        DetalleVuelo detalle = null;
+        
+        while(iterador.hasNext()){
+            vuelo = (Vuelo) iterador.next();
+            avion = consultarAvion(vuelo.getAvion());
+            ruta = consultarRuta(vuelo.getRuta());
+            detalle = new DetalleVuelo(vuelo.getIdVuelo(), ruta.getOrigen(), ruta.getDestino(), vuelo.getFechaIda(), vuelo.getFechaRegreso(),ruta.obtenerHoraFormato());
+            detalles.add(detalle);
+        }
+        //this.setChanged();
+        //this.notifyObservers();
+        
+        return detalles;
+        
     }
     
     /*

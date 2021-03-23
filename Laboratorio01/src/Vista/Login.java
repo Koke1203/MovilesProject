@@ -73,9 +73,9 @@ public class Login extends javax.swing.JFrame implements Observer{
         txtUsuario = new javax.swing.JTextField();
         labelUsuario = new javax.swing.JLabel();
         labelContrasenia = new javax.swing.JLabel();
-        txtContrasenia = new javax.swing.JTextField();
         btnIngresar = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
+        txtContrasenia = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -99,11 +99,10 @@ public class Login extends javax.swing.JFrame implements Observer{
                             .addComponent(labelUsuario, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(labelContrasenia, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addGap(44, 44, 44)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnIngresar)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtContrasenia, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                                .addComponent(txtUsuario))))
+                            .addComponent(txtUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                            .addComponent(txtContrasenia)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(btnRegresar)))
@@ -182,7 +181,7 @@ public class Login extends javax.swing.JFrame implements Observer{
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel labelContrasenia;
     private javax.swing.JLabel labelUsuario;
-    private javax.swing.JTextField txtContrasenia;
+    private javax.swing.JPasswordField txtContrasenia;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 

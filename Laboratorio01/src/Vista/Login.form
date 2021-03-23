@@ -47,12 +47,10 @@
                               <Component id="labelContrasenia" alignment="1" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="btnIngresar" min="-2" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="txtContrasenia" pref="200" max="32767" attributes="0"/>
-                                  <Component id="txtUsuario" max="32767" attributes="0"/>
-                              </Group>
+                              <Component id="txtUsuario" pref="200" max="32767" attributes="0"/>
+                              <Component id="txtContrasenia" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -99,8 +97,6 @@
             <Property name="text" type="java.lang.String" value="Contrase&#xf1;a"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtContrasenia">
-        </Component>
         <Component class="javax.swing.JButton" name="btnIngresar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Ingresar"/>
@@ -110,6 +106,8 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Regresar"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JPasswordField" name="txtContrasenia">
         </Component>
       </SubComponents>
     </Container>

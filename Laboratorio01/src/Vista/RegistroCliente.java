@@ -12,6 +12,8 @@ import java.util.Observer;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
+import com.toedter.calendar.JDateChooser;
+import java.util.Date;
 
 /**
  *
@@ -31,7 +33,11 @@ public class RegistroCliente extends javax.swing.JFrame implements Observer{
     public void configurarComponentes(){
         this.setVisible(true);
         this.setLocationRelativeTo(null);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);        
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        
+        Date date = new Date();
+        jDateChooser1.setMaxSelectableDate(date);
+        
     }
     
     public void setControlador(ControladorRegistroCliente controlador) {
@@ -66,8 +72,8 @@ public class RegistroCliente extends javax.swing.JFrame implements Observer{
         return txtIdentificacion;
     }
 
-    public JTextField getTxtNacimiento() {
-        return txtNacimiento;
+    public JDateChooser getChooserNacimiento() {
+        return jDateChooser1;
     }
 
     public JTextField getTxtNombre() {
@@ -110,7 +116,6 @@ public class RegistroCliente extends javax.swing.JFrame implements Observer{
         txtNombre = new javax.swing.JTextField();
         txtPrimerApellido = new javax.swing.JTextField();
         txtSegundoApellido = new javax.swing.JTextField();
-        txtNacimiento = new javax.swing.JTextField();
         txtCorreo = new javax.swing.JTextField();
         labelNombre = new javax.swing.JLabel();
         labelApellidos = new javax.swing.JLabel();
@@ -125,6 +130,7 @@ public class RegistroCliente extends javax.swing.JFrame implements Observer{
         labelCelular = new javax.swing.JLabel();
         labelContrasenia = new javax.swing.JLabel();
         txtContrasenia = new javax.swing.JTextField();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -165,40 +171,49 @@ public class RegistroCliente extends javax.swing.JFrame implements Observer{
         panelRegistroLayout.setHorizontalGroup(
             panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRegistroLayout.createSequentialGroup()
-                .addContainerGap(62, Short.MAX_VALUE)
-                .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelCelular, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(labelContrasenia, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(labelTelefono, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(labelDireccion, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(labelApellidos, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(labelFecha, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(labelIdentificacion, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(labelNombre, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(labelCorreo, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(18, 18, 18)
-                .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(txtContrasenia)
-                    .addComponent(txtCelular)
-                    .addComponent(txtTelefono)
-                    .addComponent(txtDireccion)
-                    .addComponent(txtCorreo)
-                    .addComponent(txtNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPrimerApellido)
-                    .addComponent(txtNombre)
-                    .addComponent(txtIdentificacion))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtSegundoApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(118, 118, 118))
-            .addGroup(panelRegistroLayout.createSequentialGroup()
-                .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelRegistroLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnRegresar))
-                    .addGroup(panelRegistroLayout.createSequentialGroup()
-                        .addGap(177, 177, 177)
-                        .addComponent(btnRegistrar)))
+                .addContainerGap()
+                .addComponent(btnRegresar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRegistroLayout.createSequentialGroup()
+                .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(panelRegistroLayout.createSequentialGroup()
+                        .addGap(79, 79, 79)
+                        .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelCelular, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(labelContrasenia, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(labelTelefono, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(labelDireccion, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(labelApellidos, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(labelFecha, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(labelIdentificacion, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(labelNombre, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(labelCorreo, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(18, 18, 18)
+                        .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelRegistroLayout.createSequentialGroup()
+                                .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(panelRegistroLayout.createSequentialGroup()
+                                        .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                                            .addComponent(txtContrasenia)
+                                            .addComponent(txtCelular)
+                                            .addComponent(txtTelefono)
+                                            .addComponent(txtDireccion)
+                                            .addComponent(txtCorreo)
+                                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtIdentificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                                    .addGroup(panelRegistroLayout.createSequentialGroup()
+                                        .addComponent(txtPrimerApellido)
+                                        .addGap(7, 7, 7)))
+                                .addComponent(txtSegundoApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panelRegistroLayout.createSequentialGroup()
+                                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelRegistroLayout.createSequentialGroup()
+                        .addGap(177, 177, 177)
+                        .addComponent(btnRegistrar)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(118, 118, 118))
         );
         panelRegistroLayout.setVerticalGroup(
             panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -220,31 +235,32 @@ public class RegistroCliente extends javax.swing.JFrame implements Observer{
                     .addComponent(txtSegundoApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelFecha)
-                    .addComponent(txtNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelCorreo))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelDireccion))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelTelefono))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelCelular))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtContrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelContrasenia))
-                .addGap(18, 18, 18)
-                .addComponent(btnRegistrar)
-                .addContainerGap(137, Short.MAX_VALUE))
+                    .addGroup(panelRegistroLayout.createSequentialGroup()
+                        .addComponent(labelFecha)
+                        .addGap(11, 11, 11)
+                        .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelCorreo))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelDireccion))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelTelefono))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelCelular))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtContrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelContrasenia))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnRegistrar))
+                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(143, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -303,6 +319,7 @@ public class RegistroCliente extends javax.swing.JFrame implements Observer{
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JButton btnRegresar;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel labelApellidos;
     private javax.swing.JLabel labelCelular;
     private javax.swing.JLabel labelContrasenia;
@@ -318,7 +335,6 @@ public class RegistroCliente extends javax.swing.JFrame implements Observer{
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtDireccion;
     private javax.swing.JTextField txtIdentificacion;
-    private javax.swing.JTextField txtNacimiento;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtPrimerApellido;
     private javax.swing.JTextField txtSegundoApellido;

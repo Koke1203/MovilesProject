@@ -7,11 +7,12 @@ package Controlador;
 
 import Modelo.Modelo;
 import Modelo.Usuario;
+import Vista.Administrador;
+import Vista.Cliente;
 import Vista.Login;
 import Vista.Principal;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,6 +23,10 @@ public class ControladorLogin implements ActionListener{
     private Login vLogin;
     private Principal vPrincipal;
     private Modelo modelo;
+    private Administrador vAdministrador;
+    private ControladorAdministrador cAdministrador;
+    private Cliente vCliente;
+    private ControladorCliente cCliente;
 
    public ControladorLogin(Login vLogin, Principal vPrincipal, Modelo modelo) {
        this.vLogin = vLogin;
@@ -38,8 +43,12 @@ public class ControladorLogin implements ActionListener{
         if(camposIngresoValidos()){
             String idUsuario = this.vLogin.getTxtUsuario().getText();
             String contrasenia = this.vLogin.getTxtContrasenia().getText();
-            
-            Usuario usuario =  modelo.consultarUsuario(idUsuario);
+            Usuario usuario = null;
+            try{
+                usuario =  modelo.consultarUsuario(idUsuario);
+            }catch(Exception e){
+                System.out.println("Error: Usuario no encontrado.");
+            }
             //Verificar que coinciden los datos ingresados
             if(usuario != null){
                 if((usuario.getIdUsuario().equalsIgnoreCase(idUsuario))&&(usuario.getContrasenia().equalsIgnoreCase(contrasenia) )){
@@ -58,7 +67,9 @@ public class ControladorLogin implements ActionListener{
     }
     
     private void IngresarComoAdministrador() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        vAdministrador = new Administrador();
+        cAdministrador = new ControladorAdministrador(vAdministrador, vLogin, modelo);
+        this.vLogin.setVisible(false);
     }
     
     private void IngresarComoCliente() {

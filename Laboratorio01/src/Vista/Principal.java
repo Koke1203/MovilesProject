@@ -73,11 +73,13 @@ public class Principal extends javax.swing.JFrame implements Observer{
     }
     
     @Override
-    public void update(Observable o, Object o1) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    
+    public void update(Observable updatedModel, Object o1) {
+        //Modelo model = (Modelo)updatedModel;
+        //if("listarDetalleVuelos".equals(model.getAccionGeneral())){
+            //this.MostrarDetallesDeVuelos();
+        //}
+        
+    }  
     
     
 
@@ -101,10 +103,7 @@ public class Principal extends javax.swing.JFrame implements Observer{
 
         tableVuelos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "ID Vuelo", "Origen", "Destino", "Fecha salida", "Fecha regreso", "Hora"
@@ -136,7 +135,7 @@ public class Principal extends javax.swing.JFrame implements Observer{
         panelBusqueda.setLayout(panelBusquedaLayout);
         panelBusquedaLayout.setHorizontalGroup(
             panelBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 692, Short.MAX_VALUE)
         );
         panelBusquedaLayout.setVerticalGroup(
             panelBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -234,6 +233,7 @@ public class Principal extends javax.swing.JFrame implements Observer{
     private javax.swing.JPanel panelPrincipal;
     private javax.swing.JTable tableVuelos;
     // End of variables declaration//GEN-END:variables
+
 
 
 }

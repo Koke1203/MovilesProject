@@ -40,46 +40,61 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <EmptySpace pref="62" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="labelCelular" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="labelContrasenia" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="labelTelefono" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="labelDireccion" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="labelApellidos" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="labelFecha" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="labelIdentificacion" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="labelNombre" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="labelCorreo" alignment="1" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="2" attributes="0">
-                      <Component id="txtContrasenia" alignment="2" max="32767" attributes="0"/>
-                      <Component id="txtCelular" alignment="2" max="32767" attributes="0"/>
-                      <Component id="txtTelefono" alignment="2" max="32767" attributes="0"/>
-                      <Component id="txtDireccion" alignment="2" max="32767" attributes="0"/>
-                      <Component id="txtCorreo" alignment="2" max="32767" attributes="0"/>
-                      <Component id="txtNacimiento" alignment="2" min="-2" pref="217" max="-2" attributes="0"/>
-                      <Component id="txtPrimerApellido" alignment="2" max="32767" attributes="0"/>
-                      <Component id="txtNombre" alignment="2" max="32767" attributes="0"/>
-                      <Component id="txtIdentificacion" alignment="2" max="32767" attributes="0"/>
-                  </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="txtSegundoApellido" min="-2" pref="200" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="118" max="-2" attributes="0"/>
+                  <Component id="btnRegresar" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
-              <Group type="102" attributes="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
+                  <Group type="103" groupAlignment="1" attributes="0">
                       <Group type="102" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btnRegresar" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="labelCelular" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelContrasenia" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelTelefono" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelDireccion" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelApellidos" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelFecha" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelIdentificacion" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelNombre" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelCorreo" alignment="1" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <Group type="103" groupAlignment="2" attributes="0">
+                                              <Component id="txtContrasenia" alignment="2" max="32767" attributes="0"/>
+                                              <Component id="txtCelular" alignment="2" max="32767" attributes="0"/>
+                                              <Component id="txtTelefono" alignment="2" max="32767" attributes="0"/>
+                                              <Component id="txtDireccion" alignment="2" max="32767" attributes="0"/>
+                                              <Component id="txtCorreo" alignment="2" max="32767" attributes="0"/>
+                                              <Component id="txtNombre" alignment="2" min="-2" pref="200" max="-2" attributes="0"/>
+                                              <Component id="txtIdentificacion" alignment="2" min="-2" pref="200" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" attributes="0">
+                                          <Component id="txtPrimerApellido" max="32767" attributes="0"/>
+                                          <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Component id="txtSegundoApellido" min="-2" pref="200" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <Component id="jDateChooser1" min="-2" pref="200" max="-2" attributes="0"/>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="177" max="-2" attributes="0"/>
                           <Component id="btnRegistrar" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="118" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -106,37 +121,39 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="labelFecha" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtNacimiento" min="-2" pref="20" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Component id="labelFecha" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="txtCorreo" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelCorreo" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="txtDireccion" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelDireccion" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="txtTelefono" alignment="3" min="-2" pref="21" max="-2" attributes="0"/>
+                              <Component id="labelTelefono" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="txtCelular" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelCelular" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="txtContrasenia" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelContrasenia" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="btnRegistrar" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="jDateChooser1" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txtCorreo" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="labelCorreo" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txtDireccion" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="labelDireccion" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txtTelefono" alignment="3" min="-2" pref="21" max="-2" attributes="0"/>
-                      <Component id="labelTelefono" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txtCelular" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="labelCelular" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txtContrasenia" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="labelContrasenia" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="btnRegistrar" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="137" max="32767" attributes="0"/>
+                  <EmptySpace pref="143" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -165,8 +182,6 @@
           <Properties>
             <Property name="toolTipText" type="java.lang.String" value="Segundo apellido"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="txtNacimiento">
         </Component>
         <Component class="javax.swing.JTextField" name="txtCorreo">
         </Component>
@@ -225,6 +240,8 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtContrasenia">
+        </Component>
+        <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser1">
         </Component>
       </SubComponents>
     </Container>
