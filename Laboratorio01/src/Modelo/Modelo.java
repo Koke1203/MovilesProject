@@ -251,6 +251,7 @@ public class Modelo extends Observable{
         return UsuarioDatos.getInstance().listarUsuarios();
     }
     
+    
     /*
      * ***************************CLIENTES****************************
     */

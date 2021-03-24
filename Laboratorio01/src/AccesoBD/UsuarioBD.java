@@ -282,15 +282,14 @@ private static final String INSERTAR_USUARIO = "{call INSERTARUSUARIO(?,?,?,?)}"
                     rs.getString("idUser"),
                     rs.getString("usuario"),
                     rs.getString("contrasenia"),
-                    rs.getInt("tipo"));
-            
+                    rs.getInt("tipo"));              
         }catch(SQLException e){
 //            try{
 //                throw new GlobalException("Error: Problema al realizar la consulta del usuario.");
 //            }catch(GlobalException ex){
 //                Logger.getLogger(UsuarioBD.class.getName()).log(Level.SEVERE, null, ex);
 //            }
-            e.printStackTrace();
+            //e.printStackTrace();
             System.out.println("Error: Problema al realizar la consulta del usuario.");
         }finally{
             try{

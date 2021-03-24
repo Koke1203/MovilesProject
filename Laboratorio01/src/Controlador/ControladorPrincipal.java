@@ -12,23 +12,25 @@ import Vista.Login;
 import Vista.RegistroCliente;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JTable;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
  * @author groya
  */
-public class ControladorPrincipal implements ActionListener{
+public class ControladorPrincipal implements ActionListener, KeyListener{
     
     private Modelo modelo;
     private Principal vPrincipal;
@@ -93,6 +95,15 @@ public class ControladorPrincipal implements ActionListener{
         }
     }
     
+    private void filter(String query){
+        JTable tableDetalleVuelos = vPrincipal.getTableVuelos();
+        DefaultTableModel dm = (DefaultTableModel) tableDetalleVuelos.getModel();
+        TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(dm);
+        tableDetalleVuelos.setRowSorter(tr);
+        tr.setRowFilter(RowFilter.regexFilter("(?i)" + query));
+        //tr.sort();
+}
+    
         @Override
     public void actionPerformed(ActionEvent ae) {
         switch(ae.getActionCommand()){
@@ -103,6 +114,24 @@ public class ControladorPrincipal implements ActionListener{
                 this.Registrarse();
                 break;                
         }
-    }   
+    }
+    
+    
+    @Override
+    public void keyTyped(KeyEvent ke) {
+    }
+
+    @Override
+    public void keyPressed(KeyEvent ke) {
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent ke) {
+        if(ke.getSource() == vPrincipal.getTxtFilter()){
+            String query = vPrincipal.getTxtFilter().getText();
+            filter(query);
+        }
+    }
     
 }

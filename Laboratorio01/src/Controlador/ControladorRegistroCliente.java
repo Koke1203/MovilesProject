@@ -19,6 +19,7 @@ import java.util.Date;
 import java.util.Iterator;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import com.toedter.calendar.JDateChooser;
 
 /**
  *
@@ -58,33 +59,51 @@ public class ControladorRegistroCliente implements ActionListener{
             SimpleDateFormat dFormat = new SimpleDateFormat("dd/MM/yyyy");
             String nacimiento = dFormat.format(fechaNac);
             
-            Usuario usuario = new Usuario(idCliente, "usuario",contrasenia, 1);
-            Cliente cliente = new Cliente(idCliente,nombre,primApellido,segundoApellido,nacimiento,correo, direccion, telefono, celular, contrasenia);
-            
             try{
-                modelo.insertarUsuario(usuario);
-                modelo.insertarCliente(cliente);
-                
-                
+                Usuario usuarioBD = modelo.consultarUsuario(idCliente);
+                if(usuarioBD == null){//Caso de que el usuario no se haya registrado aún
+                    
+                    usuarioBD = new Usuario(idCliente, "usuario",contrasenia, 1);
+                    Cliente cliente = new Cliente(idCliente,nombre,primApellido,segundoApellido,nacimiento,correo, direccion, telefono, celular, contrasenia);
+                    
+                    modelo.insertarUsuario(usuarioBD);
+                    modelo.insertarCliente(cliente);
+                    JOptionPane.showMessageDialog(null, "Cliente registrado correctamente.");
+                }else{
+                    Cliente clienteBD = modelo.consultarCliente(idCliente);
+                    if(clienteBD == null){
+                        clienteBD = new Cliente(idCliente,nombre,primApellido,segundoApellido,nacimiento,correo, direccion, telefono, celular, contrasenia);
+                        modelo.insertarCliente(clienteBD);
+                        JOptionPane.showMessageDialog(null, "Cliente registrado correctamente.");
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Cliente ya se encuentra actualmente registrado.");
+                    }
+                }
+                Regresar();
             }catch(Exception e){
-                System.out.println(e.getMessage());
-            }
-             JOptionPane.showMessageDialog(null, "Cliente registrado correctamente.");
-             Regresar();
+                System.out.println("Error: Problema al registrar al cliente.");
+            } 
         }else{
-            JOptionPane.showMessageDialog(null, "Campos NO válidos.");
+            JOptionPane.showMessageDialog(null, "Campos vacíos, favor completar todos los campos.");
         }
     }
     
     public boolean camposRegistroVacios(){
         camposTexto.clear();
         camposTexto = getComponentesTextField();
+        
         Iterator<JTextField> iter = camposTexto.iterator();
         while (iter.hasNext()) {
             if(iter.next().getText().isEmpty()){
                 return true;
             }
         }
+        JDateChooser campoFechaNacimiento = vRegistro.getChooserNacimiento();
+        if(campoFechaNacimiento.getDate() == null){
+            return true;
+        }
+        
+        
        return false;
     }
     

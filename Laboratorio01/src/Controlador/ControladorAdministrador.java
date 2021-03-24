@@ -38,6 +38,12 @@ public class ControladorAdministrador implements ActionListener {
         this.vAdministrador.setControlador(this);
         this.vAdministrador.setModelo(modelo);
     }
+    
+    private void CerrarSesion() {
+        this.vAdministrador.setVisible(false);
+        this.vLogin.getControlador().Regresar();
+        this.vAdministrador.dispose();
+    }
 
     @Override
     public void actionPerformed(ActionEvent ae) {
@@ -53,8 +59,11 @@ public class ControladorAdministrador implements ActionListener {
             case "Editar":
                 break;
             case "Cerrar":
+                CerrarSesion();
                 break;
         }
     }
+
+
     
 }

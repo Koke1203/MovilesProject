@@ -16,7 +16,7 @@ import javax.swing.JTextField;
  * @author groya
  */
 public class Login extends javax.swing.JFrame implements Observer{
-    
+   
     private ControladorLogin controlador;
     private Modelo modelo;
 
@@ -25,12 +25,13 @@ public class Login extends javax.swing.JFrame implements Observer{
         configurarComponentes();
     }
     
-    public void configurarComponentes(){
+    private void configurarComponentes(){
         this.setVisible(true);
         this.setLocationRelativeTo(null);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);        
     }
     
+
     public void setControlador(ControladorLogin controlador) {
         this.controlador = controlador;
         
@@ -43,6 +44,11 @@ public class Login extends javax.swing.JFrame implements Observer{
         this.modelo = modelo;
         this.modelo.addObserver(this);
     }
+    
+    public ControladorLogin getControlador() {
+        return controlador;
+    }
+    
 
     public JTextField getTxtContrasenia() {
         return txtContrasenia;

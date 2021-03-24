@@ -8,7 +8,8 @@ package Controlador;
 import Modelo.Modelo;
 import Modelo.Usuario;
 import Vista.Administrador;
-import Vista.Cliente;
+import Vista.VistaCliente;
+import Modelo.Cliente;
 import Vista.Login;
 import Vista.Principal;
 import java.awt.event.ActionEvent;
@@ -25,7 +26,7 @@ public class ControladorLogin implements ActionListener{
     private Modelo modelo;
     private Administrador vAdministrador;
     private ControladorAdministrador cAdministrador;
-    private Cliente vCliente;
+    private VistaCliente vCliente;
     private ControladorCliente cCliente;
 
    public ControladorLogin(Login vLogin, Principal vPrincipal, Modelo modelo) {
@@ -54,11 +55,20 @@ public class ControladorLogin implements ActionListener{
                 if((usuario.getIdUsuario().equalsIgnoreCase(idUsuario))&&(usuario.getContrasenia().equalsIgnoreCase(contrasenia) )){
                     if(usuario.getTipo() == 0){//Administrador
                         IngresarComoAdministrador();
-                    }else{//Cliente
-                        IngresarComoCliente();
+                    }else if(usuario.getTipo() == 1){//Cliente
+                        try{
+                            Cliente cliente = modelo.consultarCliente(idUsuario);
+                            if(cliente != null){
+                                IngresarComoCliente(cliente);
+                            }
+                        }catch(Exception e){
+                            JOptionPane.showMessageDialog(null, "El usuario no está inscrito como cliente.");
+                        }
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Tipo de usuario no válido.");
                     }
                 }else{
-                    JOptionPane.showMessageDialog(null, "Identificacióo o usuario inválidos.");
+                    JOptionPane.showMessageDialog(null, "Identificación o usuario inválidos.");
                 }
             }else{
                 JOptionPane.showMessageDialog(null, "Datos ingresados no corresponden a ningún usuario.");
@@ -69,11 +79,15 @@ public class ControladorLogin implements ActionListener{
     private void IngresarComoAdministrador() {
         vAdministrador = new Administrador();
         cAdministrador = new ControladorAdministrador(vAdministrador, vLogin, modelo);
-        this.vLogin.setVisible(false);
+        vLogin.setVisible(false);
     }
     
-    private void IngresarComoCliente() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private void IngresarComoCliente(Cliente cliente) {
+        vCliente = new VistaCliente();
+        cCliente = new ControladorCliente(vCliente, vLogin, modelo, cliente);
+        vLogin.setVisible(false);
+        
+        
     }
    
     //Método para regresar a la vista Principal
