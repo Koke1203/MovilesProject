@@ -45,7 +45,7 @@ public class ControladorAvion implements ActionListener {
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
-            JOptionPane.showMessageDialog(null, "Cliente registrado correctamente.");
+            JOptionPane.showMessageDialog(null, "Avion registrado correctamente.");
         }else{
             JOptionPane.showMessageDialog(null, "Campos no válidos");
         }
