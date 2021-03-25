@@ -9,7 +9,6 @@ import Modelo.Modelo;
 import Vista.Administrador;
 import Vista.Aviones;
 import Vista.Login;
-import Vista.RegistroAdministrador;
 import Vista.Rutas;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,17 +20,12 @@ import java.awt.event.ActionListener;
 public class ControladorAdministrador implements ActionListener {
     private Modelo modelo;
     private Administrador vAdministrador;
-    
+    private ControladorRutas cRuta;
     private Login vLogin;
     private Rutas vRutas;
     private Aviones vAviones;
-    //private Vuelos vVuelos;
-    private RegistroAdministrador vRegistroAdministrador;
-    private ControladorRegistroAdministrador cRegistroAdministrador;
     
-
-    
-    ControladorAdministrador(Administrador vAdministrador, Login vLogin, Modelo modelo) {
+ ControladorAdministrador(Administrador vAdministrador, Login vLogin, Modelo modelo) {
         this.modelo = modelo;
         this.vLogin = vLogin;
         this.vAdministrador = vAdministrador;
@@ -39,29 +33,44 @@ public class ControladorAdministrador implements ActionListener {
         this.vAdministrador.setModelo(modelo);
     }
     
+
+    //private Vuelos vVuelos;
+    public void IniciarVuelos(){}
+    public void IniciarAviones(){}
+    
+    public void IniciarRutas(){
+    vRutas = new Rutas();
+    this.vAdministrador.setVisible(false);
+    cRuta = new ControladorRutas(vRutas, vAdministrador, modelo);
+    }
+    
+    public void IniciarEditarAdmin(){}
+    public void IniciarRegistroAdmin(){}
+    
+    
+    
+
+    
+   
+    
     private void CerrarSesion() {
         this.vAdministrador.setVisible(false);
         this.vLogin.getControlador().Regresar();
         this.vAdministrador.dispose();
-    }
-    
-    private void RegistrarAdministrador(){
-        vRegistroAdministrador = new RegistroAdministrador();
-        cRegistroAdministrador = new ControladorRegistroAdministrador(vRegistroAdministrador, vAdministrador, modelo);
-        vAdministrador.setVisible(false);
     }
 
     @Override
     public void actionPerformed(ActionEvent ae) {
         switch(ae.getActionCommand()){
             case "Vuelos":
+                
                 break;
             case "Rutas":
+                this.IniciarRutas();
                 break;
             case "Aviones":
                 break;
             case "Registros":
-                RegistrarAdministrador();
                 break;
             case "Editar":
                 break;
