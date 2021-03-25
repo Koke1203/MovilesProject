@@ -25,6 +25,9 @@ public class Usuario {
         TIPO_USUARIO.put(1, "Cliente");
     }
     
+    public static final int ADMINISTRADOR = 0;
+    public static final int CLIENTE = 1;
+    
     public Usuario(String idUsuario, String usuario, String contrasenia, int tipo) {
         this();
         this.idUsuario = idUsuario;

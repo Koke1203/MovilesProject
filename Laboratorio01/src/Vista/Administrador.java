@@ -223,8 +223,8 @@ public class Administrador extends javax.swing.JFrame implements Observer{
     // End of variables declaration//GEN-END:variables
 
     @Override
-    public void update(Observable o, Object o1) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void update(Observable updatedModel, Object o1) {
+        //modelo = (Modelo) updatedModel;
     }
 
 }

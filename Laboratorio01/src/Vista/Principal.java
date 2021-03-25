@@ -23,14 +23,13 @@ public class Principal extends javax.swing.JFrame implements Observer{
     
     private ControladorPrincipal controlador;
     private Modelo modelo;
-    private String seleccion;
     
     public Principal() {
         initComponents();
         configurarComponentes();
     }
     
-    public void configurarComponentes(){
+    private void configurarComponentes(){
         this.setVisible(true);
         this.setLocationRelativeTo(null);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);        

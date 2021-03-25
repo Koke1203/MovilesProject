@@ -50,9 +50,14 @@ public class ControladorCliente implements ActionListener{
         
     }
 
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+        
     public Cliente getCliente() {
         return cliente;
     }
+    
 
     @Override
     public void actionPerformed(ActionEvent ae) {

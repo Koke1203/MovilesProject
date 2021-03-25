@@ -40,6 +40,11 @@ public class VistaCliente extends javax.swing.JFrame implements Observer{
         this.getBtnPerfil().addActionListener(controlador);
     }
 
+    public ControladorCliente getControlador() {
+        return controlador;
+    }
+    
+
     public void setModelo(Modelo modelo) {
         this.modelo = modelo;
         this.modelo.addObserver(this);

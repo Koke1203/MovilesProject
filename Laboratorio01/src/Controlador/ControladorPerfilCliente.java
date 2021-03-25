@@ -7,6 +7,7 @@ package Controlador;
 
 import Modelo.Cliente;
 import Modelo.Modelo;
+import Modelo.Usuario;
 import Vista.VistaCliente;
 import Vista.VistaPerfilCliente;
 import com.toedter.calendar.JDateChooser;
@@ -18,6 +19,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
@@ -56,18 +58,29 @@ public class ControladorPerfilCliente implements ActionListener{
         vPerfilCliente.getTxtTelefono().setText(cliente.getTelefono());
         vPerfilCliente.getTxtCelular().setText(cliente.getCelular());
         vPerfilCliente.getTxtContrasenia().setText(cliente.getContrasenia());
-        try{
-            String strDate = cliente.getFechaNacimiento();
-            System.out.println(strDate);
-            Date date = new SimpleDateFormat("yyyy-MM-dd").parse(strDate);
-            vPerfilCliente.getDateNacimiento().setDate(new Date());
-        }catch(ParseException ex){
-            System.out.println("Error al relizar la conversión de la fecha.");
+
+        String strDate = cliente.getFechaNacimiento();
+        Date date = FormatoFechaDateChooser(strDate);
+        vPerfilCliente.getDateNacimiento().setDate(date);
+    }
+    
+    private Date FormatoFechaDateChooser(String strDate){
+        SimpleDateFormat formatoBD = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat formatoNormal = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = null;
+        try {
+            date = formatoBD.parse(strDate);
+        } catch (ParseException e) {
+            try {
+                date = formatoNormal.parse(strDate);
+            } catch (ParseException ex) {
+                System.out.println("Error al realizar conversión de fechas (FormatoFechaDateChooser)");
+            }
         }
+        return date;
     }
     
     public boolean camposRegistroVacios(){
-        camposTexto.clear();
         camposTexto = getComponentesTextField();
         
         Iterator<JTextField> iter = camposTexto.iterator();
@@ -96,8 +109,55 @@ public class ControladorPerfilCliente implements ActionListener{
         return jTxtComponentes;
     }
     
-    @Override
-    public void actionPerformed(ActionEvent ae) {
+    private void Modificar() {
+        if(!camposRegistroVacios()){
+            String idCliente = vPerfilCliente.getTxtIdentificacion().getText();
+            String nombre = vPerfilCliente.getTxtNombre().getText();
+            String primApellido = vPerfilCliente.getTxtPrimerApellido().getText();
+            String segundoApellido = vPerfilCliente.getTxtSegundoApellido().getText();
+            Date fechaNac = vPerfilCliente.getDateNacimiento().getDate();
+            String correo = vPerfilCliente.getTxtCorreo().getText();
+            String direccion = vPerfilCliente.getTxtDireccion().getText();
+            String telefono = vPerfilCliente.getTxtTelefono().getText();
+            String celular = vPerfilCliente.getTxtCelular().getText();
+            String contrasenia = vPerfilCliente.getTxtContrasenia().getText();          
+            
+            SimpleDateFormat dFormat = new SimpleDateFormat("dd/MM/yyyy");
+            String nacimiento = dFormat.format(fechaNac);
+
+            Usuario modUsuario = new Usuario(idCliente,"usuario",contrasenia,1);
+            Cliente modCliente = new Cliente(idCliente,nombre,primApellido,segundoApellido,nacimiento,correo, direccion, telefono, celular, contrasenia);
+            
+            try{
+                modelo.modificarUsuario(modUsuario);
+                modelo.modificarCliente(modCliente);
+                
+                vCliente.getControlador().setCliente(modCliente);
+                Regresar();
+            }catch(Exception ex){
+                  JOptionPane.showMessageDialog(null, "Error al realizar la modificación del cliente.","Error",JOptionPane.ERROR_MESSAGE);
+                  Regresar();
+            }
+        }else{
+             JOptionPane.showMessageDialog(null, "Campos vacíos, favor completar todos los campos.","Error",JOptionPane.ERROR_MESSAGE);
+        }
     }
     
+    private void Regresar() {        
+        vPerfilCliente.setVisible(false);
+        vCliente.setVisible(true);
+        vPerfilCliente.dispose();
+    }
+    
+    @Override
+    public void actionPerformed(ActionEvent ae) {
+        switch(ae.getActionCommand()){
+            case "Regresar":
+                Regresar();
+                break;
+            case "Modificar":
+                Modificar();
+                break;
+        }        
+    }   
 }

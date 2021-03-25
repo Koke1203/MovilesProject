@@ -37,12 +37,14 @@ public class VistaPerfilCliente extends javax.swing.JFrame implements Observer{
         
         Date date = new Date();
         dateNacimiento.setMaxSelectableDate(date);
+        dateNacimiento.setDateFormatString("dd/MM/yyyy");
     }
     
     public void setControlador(ControladorPerfilCliente controlador) {
         this.controlador = controlador;
         
         btnModificar.addActionListener(controlador);
+        btnRegresar.addActionListener(controlador);
     }
 
     public void setModelo(Modelo modelo) {

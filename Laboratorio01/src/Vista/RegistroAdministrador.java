@@ -4,66 +4,67 @@
  * and open the template in the editor.
  */
 package Vista;
-import Controlador.*;
+
+import Controlador.ControladorRegistroAdministrador;
 import Modelo.Modelo;
-import javax.swing.WindowConstants;
 import java.util.Observable;
 import java.util.Observer;
+import javax.swing.JButton;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.WindowConstants;
 
 /**
  *
  * @author groya
  */
-public class Login extends javax.swing.JFrame implements Observer{
-   
-    private ControladorLogin controlador;
-    private Modelo modelo;
+public class RegistroAdministrador extends javax.swing.JFrame implements Observer{
 
-    public Login() {
+    private ControladorRegistroAdministrador controlador;
+    private Modelo modelo;
+    
+    public RegistroAdministrador() {
         initComponents();
         configurarComponentes();
     }
-    
+   
     private void configurarComponentes(){
         this.setVisible(true);
         this.setLocationRelativeTo(null);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);        
     }
     
-
-    public void setControlador(ControladorLogin controlador) {
+    
+    public void setControlador(ControladorRegistroAdministrador controlador) {
         this.controlador = controlador;
         
-        //Action listener
-        btnIngresar.addActionListener(controlador);
-        btnRegresar.addActionListener(controlador);
+        //Action Listener
+        getBtnRegistrar().addActionListener(controlador);
+        getBtnRegresar().addActionListener(controlador);
     }
 
     public void setModelo(Modelo modelo) {
         this.modelo = modelo;
         this.modelo.addObserver(this);
     }
-    
-    public ControladorLogin getControlador() {
-        return controlador;
+
+    public JButton getBtnRegistrar() {
+        return btnRegistrar;
     }
-    
+
+    public JButton getBtnRegresar() {
+        return btnRegresar;
+    }
 
     public JTextField getTxtContrasenia() {
         return txtContrasenia;
     }
 
-    public JTextField getTxtUsuario() {
-        return txtUsuario;
+    public JTextField getTxtIdentificacion() {
+        return txtIdentificacion;
     }
     
     
-    
-    @Override
-    public void update(Observable o, Object o1) {
-
-    }
     
 
     /**
@@ -76,22 +77,22 @@ public class Login extends javax.swing.JFrame implements Observer{
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        txtUsuario = new javax.swing.JTextField();
-        labelUsuario = new javax.swing.JLabel();
-        labelContrasenia = new javax.swing.JLabel();
-        btnIngresar = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
+        txtIdentificacion = new javax.swing.JTextField();
+        btnRegistrar = new javax.swing.JButton();
+        labelIdentificacion = new javax.swing.JLabel();
+        labelContrasenia = new javax.swing.JLabel();
         txtContrasenia = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        labelUsuario.setText("Usuario");
+        btnRegresar.setText("Regresar");
+
+        btnRegistrar.setText("Registrar");
+
+        labelIdentificacion.setText("Identificación");
 
         labelContrasenia.setText("Contraseña");
-
-        btnIngresar.setText("Ingresar");
-
-        btnRegresar.setText("Regresar");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -100,47 +101,54 @@ public class Login extends javax.swing.JFrame implements Observer{
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(192, 192, 192)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelUsuario, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(labelContrasenia, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(44, 44, 44)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnIngresar)
-                            .addComponent(txtUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                            .addComponent(txtContrasenia)))
+                        .addGap(10, 10, 10)
+                        .addComponent(btnRegresar))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnRegresar)))
-                .addContainerGap(199, Short.MAX_VALUE))
+                        .addGap(151, 151, 151)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(labelIdentificacion)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtIdentificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(labelContrasenia)
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnRegistrar)
+                                    .addComponent(txtContrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(157, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnRegresar)
-                .addGap(150, 150, 150)
+                .addGap(115, 115, 115)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelUsuario))
-                .addGap(18, 18, 18)
+                    .addComponent(txtIdentificacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelIdentificacion))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelContrasenia)
                     .addComponent(txtContrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(btnIngresar)
-                .addContainerGap(257, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnRegistrar)
+                .addContainerGap(171, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -163,32 +171,37 @@ public class Login extends javax.swing.JFrame implements Observer{
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistroAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistroAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistroAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistroAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Login().setVisible(true);
+                new RegistroAdministrador().setVisible(true);
             }
         });
     }
 
+    @Override
+    public void update(Observable o, Object o1) {
+       
+    }
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnIngresar;
+    private javax.swing.JButton btnRegistrar;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel labelContrasenia;
-    private javax.swing.JLabel labelUsuario;
+    private javax.swing.JLabel labelIdentificacion;
     private javax.swing.JPasswordField txtContrasenia;
-    private javax.swing.JTextField txtUsuario;
+    private javax.swing.JTextField txtIdentificacion;
     // End of variables declaration//GEN-END:variables
-
 }
