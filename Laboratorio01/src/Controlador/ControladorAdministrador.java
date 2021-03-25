@@ -9,6 +9,7 @@ import Modelo.Modelo;
 import Vista.Administrador;
 import Vista.Aviones;
 import Vista.Login;
+import Vista.RegistroAdministrador;
 import Vista.Rutas;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,6 +25,8 @@ public class ControladorAdministrador implements ActionListener {
     private Login vLogin;
     private Rutas vRutas;
     private Aviones vAviones;
+    private RegistroAdministrador vRegistroAdministrador;
+    private ControladorRegistroAdministrador cRegistroAdministrador;
     
  ControladorAdministrador(Administrador vAdministrador, Login vLogin, Modelo modelo) {
         this.modelo = modelo;
@@ -49,7 +52,11 @@ public class ControladorAdministrador implements ActionListener {
     
     
     
-
+    private void RegistrarAdministrador(){
+        vRegistroAdministrador = new RegistroAdministrador();
+        cRegistroAdministrador = new ControladorRegistroAdministrador(vRegistroAdministrador, vAdministrador, modelo);
+        vAdministrador.setVisible(false);
+    }
     
    
     
@@ -71,6 +78,7 @@ public class ControladorAdministrador implements ActionListener {
             case "Aviones":
                 break;
             case "Registros":
+                RegistrarAdministrador();
                 break;
             case "Editar":
                 break;

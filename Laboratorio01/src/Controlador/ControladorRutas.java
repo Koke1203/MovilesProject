@@ -22,12 +22,11 @@ public class ControladorRutas implements ActionListener {
 
     private Rutas vRutas;
     private Administrador vAdministrador;
-    private Administrador vPrincipal;
     private Modelo modelo;
 
-    public ControladorRutas(Rutas vRutas, Administrador vPrincipal, Modelo modelo) {
+    public ControladorRutas(Rutas vRutas, Administrador vAdministrador, Modelo modelo) {
         this.vRutas = vRutas;
-        this.vPrincipal = vPrincipal;
+        this.vAdministrador = vAdministrador;
         this.modelo = modelo;
 
         vRutas.setControlador(this);
