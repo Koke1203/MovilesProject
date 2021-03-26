@@ -6,12 +6,15 @@
 package Controlador;
 
 import Modelo.Cliente;
+import Modelo.DetalleHistoricoCompra;
 import Modelo.Modelo;
 import Vista.Login;
 import Vista.VistaCliente;
 import Vista.VistaPerfilCliente;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -34,6 +37,27 @@ public class ControladorCliente implements ActionListener{
         
         this.vCliente.setControlador(this);
         this.vCliente.setModelo(modelo);
+        
+        MostrarHistoricosVuelos();
+    }
+    
+    private void MostrarHistoricosVuelos() {
+        ArrayList<DetalleHistoricoCompra> detalleHistoricoCompras = modelo.listarDetalleHistoricoComprasCliente(cliente.getIdCliente());
+        if ((detalleHistoricoCompras != null) && (!detalleHistoricoCompras.isEmpty())) {
+            String[] nombreColumnas = {"ID Vuelo", "Origen", "Destino", "Precio", "Fecha"};
+            DefaultTableModel tableModel = new DefaultTableModel(null, nombreColumnas);
+            Object[] fila = new Object[tableModel.getColumnCount()];
+            for (DetalleHistoricoCompra detalle : detalleHistoricoCompras) {
+                fila[0] = detalle.getIdVuelo();
+                fila[1] = detalle.getOrigen();
+                fila[2] = detalle.getDestino();
+                fila[3] = detalle.getPrecio();
+                fila[4] = detalle.getFecha();
+
+                tableModel.addRow(fila);
+            }
+            vCliente.getTableHistorialCompras().setModel(tableModel);
+        }
     }
     
     private void CerrarSesion() {
