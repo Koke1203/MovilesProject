@@ -6,6 +6,7 @@
 package Controlador;
 
 import Modelo.Modelo;
+import Modelo.Usuario;
 import Vista.Administrador;
 import Vista.Aviones;
 import Vista.Login;
@@ -13,6 +14,7 @@ import Vista.RegistroAdministrador;
 import Vista.Rutas;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -20,6 +22,7 @@ import java.awt.event.ActionListener;
  */
 public class ControladorAdministrador implements ActionListener {
     private Modelo modelo;
+    private Usuario administrador;
     private Administrador vAdministrador;
     private ControladorRutas cRuta;
     private Login vLogin;
@@ -28,14 +31,19 @@ public class ControladorAdministrador implements ActionListener {
     private RegistroAdministrador vRegistroAdministrador;
     private ControladorRegistroAdministrador cRegistroAdministrador;
     
- ControladorAdministrador(Administrador vAdministrador, Login vLogin, Modelo modelo) {
+ ControladorAdministrador(Administrador vAdministrador, Login vLogin, Modelo modelo, Usuario administrador) {
         this.modelo = modelo;
+        this.administrador = administrador;
         this.vLogin = vLogin;
         this.vAdministrador = vAdministrador;
         this.vAdministrador.setControlador(this);
         this.vAdministrador.setModelo(modelo);
     }
     
+    
+    public void setAdministrador(Usuario administrador) {
+        this.administrador = administrador;
+    }
 
     //private Vuelos vVuelos;
     public void IniciarVuelos(){}
@@ -50,11 +58,13 @@ public class ControladorAdministrador implements ActionListener {
     public void IniciarEditarAdmin(){}
     public void IniciarRegistroAdmin(){}
     
+
+
     
     
     private void RegistrarAdministrador(){
         vRegistroAdministrador = new RegistroAdministrador();
-        cRegistroAdministrador = new ControladorRegistroAdministrador(vRegistroAdministrador, vAdministrador, modelo);
+        cRegistroAdministrador = new ControladorRegistroAdministrador(vRegistroAdministrador, vAdministrador, modelo, administrador);
         vAdministrador.setVisible(false);
     }
     

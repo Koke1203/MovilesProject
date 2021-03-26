@@ -25,10 +25,14 @@ public class Administrador extends javax.swing.JFrame implements Observer{
         this.configurarComponentes();
     }
     
-    public void configurarComponentes(){
+    private void configurarComponentes(){
         this.setVisible(true);
         this.setLocationRelativeTo(null);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);        
+    }
+    
+    public ControladorAdministrador getControlador() {
+        return controlador;
     }
     
     public void setControlador(ControladorAdministrador controlador) {

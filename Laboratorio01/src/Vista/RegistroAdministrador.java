@@ -41,13 +41,19 @@ public class RegistroAdministrador extends javax.swing.JFrame implements Observe
         //Action Listener
         getBtnRegistrar().addActionListener(controlador);
         getBtnRegresar().addActionListener(controlador);
+        getBtnModificar().addActionListener(controlador);
+        
     }
 
     public void setModelo(Modelo modelo) {
         this.modelo = modelo;
         this.modelo.addObserver(this);
     }
-
+    
+    public JButton getBtnModificar() {
+        return btnModificar;
+    }
+    
     public JButton getBtnRegistrar() {
         return btnRegistrar;
     }
@@ -63,9 +69,23 @@ public class RegistroAdministrador extends javax.swing.JFrame implements Observe
     public JTextField getTxtIdentificacion() {
         return txtIdentificacion;
     }
-    
-    
-    
+
+    public JTextField getTxtContraseniaAdmin() {
+        return txtContraseniaAdmin;
+    }
+
+    public void setTxtContraseniaAdmin(JPasswordField txtContraseniaAdmin) {
+        this.txtContraseniaAdmin = txtContraseniaAdmin;
+    }
+
+    public JTextField getTxtIdAdmin() {
+        return txtIdAdmin;
+    }
+
+    public void setTxtIdAdmin(JTextField txtIdAdmin) {
+        this.txtIdAdmin = txtIdAdmin;
+    }
+ 
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -83,6 +103,12 @@ public class RegistroAdministrador extends javax.swing.JFrame implements Observe
         labelIdentificacion = new javax.swing.JLabel();
         labelContrasenia = new javax.swing.JLabel();
         txtContrasenia = new javax.swing.JPasswordField();
+        jSeparator1 = new javax.swing.JSeparator();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        txtContraseniaAdmin = new javax.swing.JPasswordField();
+        txtIdAdmin = new javax.swing.JTextField();
+        btnModificar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -94,17 +120,31 @@ public class RegistroAdministrador extends javax.swing.JFrame implements Observe
 
         labelContrasenia.setText("Contraseña");
 
+        jLabel1.setText("Registro de nuevo administrador");
+
+        jLabel2.setText("Edición de administrador actual");
+
+        txtIdAdmin.setEditable(false);
+
+        btnModificar.setText("Modificar");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(btnRegresar))
+                        .addComponent(txtIdAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtContraseniaAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnModificar))
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(151, 151, 151)
+                        .addGap(19, 19, 19)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(labelIdentificacion)
@@ -116,14 +156,30 @@ public class RegistroAdministrador extends javax.swing.JFrame implements Observe
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(btnRegistrar)
                                     .addComponent(txtContrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(157, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 575, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnRegresar)
+                .addGap(32, 32, 32))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnRegresar)
-                .addGap(115, 115, 115)
+                .addComponent(jLabel2)
+                .addGap(28, 28, 28)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtIdAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtContraseniaAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnModificar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(47, 47, 47)
+                .addComponent(jLabel1)
+                .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtIdentificacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelIdentificacion))
@@ -133,7 +189,9 @@ public class RegistroAdministrador extends javax.swing.JFrame implements Observe
                     .addComponent(txtContrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnRegistrar)
-                .addContainerGap(171, Short.MAX_VALUE))
+                .addGap(42, 42, 42)
+                .addComponent(btnRegresar)
+                .addGap(22, 22, 22))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -141,14 +199,12 @@ public class RegistroAdministrador extends javax.swing.JFrame implements Observe
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 557, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -196,12 +252,18 @@ public class RegistroAdministrador extends javax.swing.JFrame implements Observe
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JButton btnRegresar;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel labelContrasenia;
     private javax.swing.JLabel labelIdentificacion;
     private javax.swing.JPasswordField txtContrasenia;
+    private javax.swing.JPasswordField txtContraseniaAdmin;
+    private javax.swing.JTextField txtIdAdmin;
     private javax.swing.JTextField txtIdentificacion;
     // End of variables declaration//GEN-END:variables
 }

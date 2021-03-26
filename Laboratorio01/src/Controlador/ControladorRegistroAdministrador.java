@@ -25,17 +25,24 @@ public class ControladorRegistroAdministrador implements ActionListener{
     private RegistroAdministrador vRegistroAdministrador;
     private Administrador vAdministrador;
     private Modelo modelo;
+    private Usuario administrador;
     
 
-    ControladorRegistroAdministrador(RegistroAdministrador vRegistroAdministrador, Administrador vAdministrador, Modelo modelo) {
+    ControladorRegistroAdministrador(RegistroAdministrador vRegistroAdministrador, Administrador vAdministrador, Modelo modelo, Usuario administrador) {
         this.vRegistroAdministrador = vRegistroAdministrador;
         this.vAdministrador = vAdministrador;
         this.modelo = modelo;
+        this.administrador = administrador;
         
         vRegistroAdministrador.setControlador(this);
         vRegistroAdministrador.setModelo(modelo);
         
-        
+        MostrarDatosAdministrador();
+    }
+    
+    private void MostrarDatosAdministrador(){
+        vRegistroAdministrador.getTxtIdAdmin().setText(administrador.getIdUsuario());
+        vRegistroAdministrador.getTxtContraseniaAdmin().setText(administrador.getContrasenia());
     }
     
     private void Registrar() {
@@ -58,13 +65,31 @@ public class ControladorRegistroAdministrador implements ActionListener{
                 } catch (Exception ex) {
                     Logger.getLogger(ControladorRegistroAdministrador.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                JOptionPane.showMessageDialog(null, "Administrador agregado correctamente.", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(vRegistroAdministrador, "Administrador agregado correctamente.", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
                 Regresar();
             }
 
         }else{
-            JOptionPane.showMessageDialog(null, "Campos vacíos, favor completar todos los campos.");
+            JOptionPane.showMessageDialog(vRegistroAdministrador, "Campo vacío, favor ingresar una contraseña.","Error",JOptionPane.ERROR_MESSAGE);
         }
+    }
+    
+    private void Modificar() {
+        if(ValidarCamposAdministrador()){
+            String contrasenia = vRegistroAdministrador.getTxtContraseniaAdmin().getText();
+            if (!contrasenia.equals(administrador.getContrasenia())) {
+                administrador.setContrasenia(contrasenia);
+                vAdministrador.getControlador().setAdministrador(administrador);
+                modelo.modificarUsuario(administrador);
+                JOptionPane.showMessageDialog(vAdministrador, "Administrador modificador correctamente!", "Modificación", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }else{
+            JOptionPane.showMessageDialog(vRegistroAdministrador, "Campos vacíos, favor completar los campos del registro.","Error",JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    private boolean ValidarCamposAdministrador(){
+        return !(vRegistroAdministrador.getTxtIdentificacion().getText().isEmpty() && vRegistroAdministrador.getTxtContraseniaAdmin().getText().isEmpty());
     }
 
     private void Regresar() {
@@ -82,12 +107,14 @@ public class ControladorRegistroAdministrador implements ActionListener{
             case "Registrar":
                 Registrar();
                 break;
+            case "Modificar":
+                Modificar();
+                break;
             case "Regresar":
                 Regresar();
                 break;
         }
     }
-
 
     
 }

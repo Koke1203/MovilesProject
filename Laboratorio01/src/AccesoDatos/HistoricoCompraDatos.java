@@ -67,4 +67,11 @@ public class HistoricoCompraDatos {
     public HistoricoCompra consultarHistoricoCompra(String idHistoricoCompra) {
         return sHistoricoCompra.consultarHistoricoCompra(idHistoricoCompra);
     }
+    
+    /**
+    * ***********************LISTAR HISTORICOS DE COMPRA****************
+    */
+    public ArrayList<HistoricoCompra> listarHistoricosComprasCliente(String idCliente) {
+        return sHistoricoCompra.listarHistoricoComprasCliente(idCliente);
+    }
 }

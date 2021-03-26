@@ -193,6 +193,7 @@ public class Modelo extends Observable{
         return VuelosDatos.getInstance().listarVuelos();
     }
     
+    
     public ArrayList<DetalleVuelo> listarDetalleVuelos(){
         //setAccionGeneral("listarDetalleVuelos");
         
@@ -316,6 +317,30 @@ public class Modelo extends Observable{
     
     public ArrayList<HistoricoCompra> listarHistoricoCompras(){
         return HistoricoCompraDatos.getInstance().listarHistoricosCompra();
+    }
+    
+    public ArrayList<HistoricoCompra> consultarHistoricoCliente(String idCliente){
+        return HistoricoCompraDatos.getInstance().listarHistoricosComprasCliente(idCliente);
+    }
+    
+    public ArrayList<DetalleHistoricoCompra> listarDetalleHistoricoComprasCliente(String idCliente){
+        ArrayList<DetalleHistoricoCompra> detalles = new ArrayList<>();
+        ArrayList<HistoricoCompra> historicos = consultarHistoricoCliente(idCliente);
+        
+        Vuelo vuelo = null;
+        HistoricoCompra historico = null;
+        DetalleHistoricoCompra detalleHistCliente = null;
+        Ruta ruta = null;
+        
+        Iterator iterador = historicos.iterator();
+        while(iterador.hasNext()){
+            historico = (HistoricoCompra) iterador.next();
+            vuelo = consultarVuelo(historico.getIdVuelo());
+            ruta = consultarRuta(vuelo.getRuta());
+            detalleHistCliente = new DetalleHistoricoCompra(vuelo.getIdVuelo(),ruta.getOrigen(), ruta.getDestino(),vuelo.getPrecio(),ruta.obtenerHoraFormato());
+            detalles.add(detalleHistCliente);
+        }        
+        return detalles;
     }
     
 }

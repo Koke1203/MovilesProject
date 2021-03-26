@@ -54,7 +54,7 @@ public class ControladorLogin implements ActionListener{
             if(usuario != null){
                 if((usuario.getIdUsuario().equalsIgnoreCase(idUsuario))&&(usuario.getContrasenia().equalsIgnoreCase(contrasenia) )){
                     if(usuario.getTipo() == 0){//Administrador
-                        IngresarComoAdministrador();
+                        IngresarComoAdministrador(usuario);
                     }else if(usuario.getTipo() == 1){//Cliente
                         try{
                             Cliente cliente = modelo.consultarCliente(idUsuario);
@@ -76,9 +76,9 @@ public class ControladorLogin implements ActionListener{
         }
     }
     
-    private void IngresarComoAdministrador() {
+    private void IngresarComoAdministrador(Usuario administrador) {
         vAdministrador = new Administrador();
-        cAdministrador = new ControladorAdministrador(vAdministrador, vLogin, modelo);
+        cAdministrador = new ControladorAdministrador(vAdministrador, vLogin, modelo, administrador);
         vLogin.setVisible(false);
     }
     

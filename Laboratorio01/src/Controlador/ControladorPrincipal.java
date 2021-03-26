@@ -59,7 +59,7 @@ public class ControladorPrincipal implements ActionListener, KeyListener{
         this.vPrincipal.setVisible(false);
     }
 
-    public void MostrarDetallesDeVuelos() {
+    private void MostrarDetallesDeVuelos() {
         ArrayList<DetalleVuelo> detallesVuelo = modelo.listarDetalleVuelos();
         if ((detallesVuelo != null) && (!detallesVuelo.isEmpty())) {
             String[] nombreColumnas = {"ID Vuelo", "Origen", "Destino", "Fecha salida", "Fecha regreso", "Hora"};
@@ -82,10 +82,8 @@ public class ControladorPrincipal implements ActionListener, KeyListener{
     
     public String FormatoFecha(String strFecha) {
         try {
-            // Convert input string into a date
             DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
             Date date = inputFormat.parse(strFecha);
-            // Format date into output format
             DateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy");
             String outputString = outputFormat.format(date);
             return outputString;

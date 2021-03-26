@@ -27,6 +27,7 @@ public class HistoricoCompraBD extends Servicio{
     private static final String MODIFICAR_HISTORICOCOMPRA = "{call MODIFICARHISTORICOCOMPRA(?,?,?)}";
     private static final String CONSULTAR_HISTORICOCOMPRA = "{?=call CONSULTARHISTORICOCOMPRA(?)}";
     private static final String LISTAR_HISTORICOCOMPRAS = "{?=call LISTARHISTORICOCOMPRA()}";
+    private static final String LISTAR_HISTORICOCOMPRAS_CLIENTE = "{?=call LISTARHISTORICOCOMPRACLIENTE(?)}";
     
     public void insertarHistoricoCompra(HistoricoCompra historicoCompra) throws Exception{
         try{
@@ -302,5 +303,64 @@ public class HistoricoCompraBD extends Servicio{
             }
         }
         return historicoCompra;
+    }
+    
+    public ArrayList<HistoricoCompra> listarHistoricoComprasCliente(String idCliente){
+        try{
+            Conectar();
+        }catch(ClassNotFoundException e){
+            try{
+                throw new GlobalException("Error: Driver para establecer conexión, no se ha encontrado.");
+            }catch(GlobalException ex){
+                Logger.getLogger(HistoricoCompraBD.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }catch(SQLException e){
+            try{
+                throw new NoDataException("Error: Base de datos no se encuentra disponible.");
+            }catch(NoDataException ex){
+                Logger.getLogger(HistoricoCompraBD.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        ResultSet rs = null;
+        ArrayList<HistoricoCompra> coleccion = new ArrayList<>();
+        HistoricoCompra historicoCompra = null;
+        CallableStatement pstmt = null;
+        try{
+            pstmt = conexion.prepareCall(LISTAR_HISTORICOCOMPRAS_CLIENTE);
+            pstmt.registerOutParameter(1, OracleTypes.CURSOR);
+            pstmt.setString(2, idCliente);
+            pstmt.execute();
+            rs = (ResultSet) pstmt.getObject(1);
+            while(rs.next()){
+                historicoCompra = new HistoricoCompra(
+                        rs.getString("IDHISTORICOCOMPRA"),
+                        rs.getString("VUELO_IDVUELO"),
+                        rs.getString("CLIENTE_IDCLIENTE"));
+                coleccion.add(historicoCompra);
+            }
+        }catch(SQLException e){
+            try{
+                throw new GlobalException("Error: Problema al realizar el listado de los historicos de compra del cliente.");
+            }catch(GlobalException ex){
+                Logger.getLogger(HistoricoCompraBD.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }finally{
+            try{
+                if(rs != null){
+                    rs.close();
+                }
+                if(pstmt != null){
+                    pstmt.close();
+                }
+                Desconectar();
+            }catch(SQLException e){
+                try{
+                    throw new GlobalException("Error: Estatutos invalidos o nulos.");
+                }catch(GlobalException ex){
+                    Logger.getLogger(HistoricoCompraBD.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return coleccion;
     }
 }

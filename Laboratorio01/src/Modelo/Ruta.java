@@ -138,6 +138,7 @@ public class Ruta {
          String minutosFormato = hora < 9 ? String.format("%02d",hora) : String.format("%2d",hora);
         return String.format("%s:%s", horaFormato, minutosFormato);
     }
+
     
     
     //Formato de 24hrs -> 0 - 23
